@@ -1,0 +1,149 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Easy Alt Edit\n"
+"POT-Creation-Date: 2021-02-04 16:03+0100\n"
+"PO-Revision-Date: 2021-02-04 14:43+0100\n"
+"Last-Translator: Jorhel Bourdier <jorhel.bdr@gmail.com>\n"
+"Language-Team: Jorhel Bourdier <jorhel.bdr@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: eae.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+
+#: eae.php:42
+msgid "Alt Text"
+msgstr ""
+
+#: eae.php:82
+msgid "Use image title"
+msgstr ""
+
+#: wc-am.php:126 wc-am.php:127
+msgid " Activation"
+msgstr ""
+
+#: wc-am.php:128 wc-am.php:419
+msgid "API Key Activation"
+msgstr ""
+
+#: wc-am.php:129
+msgid "API Key Deactivation"
+msgstr ""
+
+#: wc-am.php:224
+msgid ""
+"Attempt to migrate data failed. Deactivate then reactive this plugin or "
+"theme, then enter your API Key on the settings screen to receive software "
+"updates. Contact support if assistance is required."
+msgstr ""
+
+#: wc-am.php:350
+#, php-format
+msgid ""
+"The <strong>%1$s</strong> API Key has not been activated, so the %2$s is "
+"inactive! %3$sClick here%4$s to activate <strong>%5$s</strong>."
+msgstr ""
+
+#: wc-am.php:368
+#, php-format
+msgid ""
+"<b>Warning!</b> You're blocking external requests which means you won't be "
+"able to get %1$s updates. Please add %2$s to %3$s."
+msgstr ""
+
+#: wc-am.php:400 wc-am.php:404
+msgid "Save Changes"
+msgstr ""
+
+#: wc-am.php:428
+msgid "API Key"
+msgstr ""
+
+#: wc-am.php:443
+msgid "Product ID"
+msgstr ""
+
+#: wc-am.php:455
+msgid "API Key Status"
+msgstr ""
+
+#: wc-am.php:474
+msgid "API Deactivation"
+msgstr ""
+
+#: wc-am.php:483
+msgid "Deactivate API Key"
+msgstr ""
+
+#: wc-am.php:501
+msgid "Activated"
+msgstr ""
+
+#: wc-am.php:505
+msgid "Deactivated"
+msgstr ""
+
+#: wc-am.php:623
+#, php-format
+msgid "%s activated. "
+msgstr ""
+
+#: wc-am.php:629
+msgid ""
+"Connection failed to the License Key API server. Try again later. There may "
+"be a problem on your server preventing outgoing requests, or the store is "
+"blocking your request to activate the plugin/theme."
+msgstr ""
+
+#: wc-am.php:659
+msgid "API Key deactivated. "
+msgstr ""
+
+#: wc-am.php:695
+msgid ""
+"The API Key could not be deactivated. Use the API Key Deactivation tab to "
+"manually deactivate the API Key before activating a new API Key. If all else "
+"fails, go to Plugins, then deactivate and reactivate this plugin, or if a "
+"theme change themes, then change back to this theme, then go to the Settings "
+"for this plugin/theme and enter the API Key information again to activate "
+"it. Also check the My Account dashboard to see if the API Key for this site "
+"was still active before the error message was displayed."
+msgstr ""
+
+#: wc-am.php:707
+msgid "Deactivates an API Key so it can be used on another blog."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Easy Alt Edit"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://www.wprank.net"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"This extension allows you to easily and quickly manage alternate titles of "
+"your images directly from the media list."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "CreaNico / WP Rank"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://www.creanico.fr"
+msgstr ""
