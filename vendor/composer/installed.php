@@ -1,13 +1,13 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => '1.0.0+no-version-set',
-    'version' => '1.0.0.0',
+    'pretty_version' => 'dev-develop',
+    'version' => 'dev-develop',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
-    'name' => 'wprank/eate',
+    'reference' => '3a3193ce8496478f79883f6d52241aed60d100f8',
+    'name' => 'wprank/ease-alt-edit',
   ),
   'versions' => 
   array (
@@ -38,14 +38,14 @@
       ),
       'reference' => '7da1894633f168fe244afc6de00d141f27517b62',
     ),
-    'wprank/eate' => 
+    'wprank/ease-alt-edit' => 
     array (
-      'pretty_version' => '1.0.0+no-version-set',
-      'version' => '1.0.0.0',
+      'pretty_version' => 'dev-develop',
+      'version' => 'dev-develop',
       'aliases' => 
       array (
       ),
-      'reference' => NULL,
+      'reference' => '3a3193ce8496478f79883f6d52241aed60d100f8',
     ),
   ),
 );
