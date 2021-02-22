@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '3a3193ce8496478f79883f6d52241aed60d100f8',
+    'reference' => '2ddad11ed6d02c4d3c871f53ce8f53562a075b0f',
     'name' => 'wprank/ease-alt-edit',
   ),
   'versions' => 
@@ -68,7 +68,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '3a3193ce8496478f79883f6d52241aed60d100f8',
+      'reference' => '2ddad11ed6d02c4d3c871f53ce8f53562a075b0f',
     ),
   ),
 );

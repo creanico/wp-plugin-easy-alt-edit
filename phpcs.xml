@@ -2,7 +2,7 @@
 <ruleset name="WordPress Coding Standards">
     <description>Apply WordPress Coding Standards to Easy Alt Edit</description>
 
-	  <arg name="extensions" value="php"/>
+    <arg name="extensions" value="php"/>
 
     <arg name="colors"/>
     <arg value="p"/>
@@ -10,4 +10,7 @@
     <file>.</file>
 
     <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>./index.php</exclude-pattern>
+
+    <rule ref="WordPress"/>
 </ruleset>
