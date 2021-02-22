@@ -69,8 +69,8 @@ if ( ! class_exists( 'EAE_Options' ) ) {
 		 */
 		public function options_page() {
 			add_options_page(
-				esc_html( 'Easy Alt Edit' ),
-				esc_html( 'Easy Alt Edit' ),
+				esc_html__( 'Easy Alt Edit', 'eae' ),
+				esc_html__( 'Easy Alt Edit', 'eae' ),
 				'manage_options',
 				'easy-alt-edit',
 				array( $this, 'render' )

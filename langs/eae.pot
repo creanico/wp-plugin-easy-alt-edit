@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Easy Alt Edit\n"
-"POT-Creation-Date: 2021-02-16 15:05+0100\n"
-"PO-Revision-Date: 2021-02-04 14:43+0100\n"
+"POT-Creation-Date: 2021-02-22 14:39+0100\n"
+"PO-Revision-Date: 2021-02-22 14:37+0100\n"
 "Last-Translator: Jorhel Bourdier <jorhel.bdr@gmail.com>\n"
 "Language-Team: Jorhel Bourdier <jorhel.bdr@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -13,25 +13,37 @@ msgstr ""
 "X-Generator: Poedit 2.4.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: eae.php\n"
+"X-Poedit-WPHeader: easy-alt-edit.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
-#: eae.php:37
+#. Plugin Name of the plugin/theme
+#: classes/class-eae-options.php:72 classes/class-eae-options.php:73
+msgid "Easy Alt Edit"
+msgstr ""
+
+#: classes/class-eae-options.php:96
+msgid "force the use of alternative text from an image"
+msgstr ""
+
+#: classes/class-eae-options.php:101
+msgid ""
+"If this option is checked, the alternative text entered from the \"Media\" "
+"tab will take priority over the alternative text entered from an article, a "
+"page ..."
+msgstr ""
+
+#: classes/class-eae-plugin.php:44
 msgid "Alt Text"
 msgstr ""
 
-#: eae.php:87
+#: classes/class-eae-plugin.php:91
 msgid "Use image title"
-msgstr ""
-
-#. Plugin Name of the plugin/theme
-msgid "Easy Alt Edit"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
