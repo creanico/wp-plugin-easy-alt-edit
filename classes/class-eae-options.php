@@ -58,7 +58,10 @@ if ( ! class_exists( 'EAE_Options' ) ) {
 			register_setting(
 				'eae_options',
 				'eae_options',
-				array( $this, 'sanitize' )
+				array(
+					'type'				=> 'array',
+					'sanitize_callback' => [ $this, 'sanitize' ],
+				)
 			);
 		}
 
@@ -96,7 +99,7 @@ if ( ! class_exists( 'EAE_Options' ) ) {
 								<?php esc_html_e( 'force the use of alternative text from an image', 'eae' ); ?>
 							</th>
 							<td>
-								<?php $value = self::get_option( 'force_alts' ); ?>
+								<?php $value = (boolean) self::get_option( 'force_alts' ); ?>
 								<input type="checkbox" name="eae_options[force_alts]" value="1" <?php checked( $value, 1 ); ?>>
 								<?php esc_html_e( 'If this option is checked, the alternative text entered from the "Media" tab will take priority over the alternative text entered from an article, a page ...', 'eae' ); ?>
 							</td>
@@ -115,15 +118,8 @@ if ( ! class_exists( 'EAE_Options' ) ) {
 		 * @since 1.0.0
 		 */
 		public function sanitize( $options ) {
-			if ( ! is_array( $options ) || empty( $options ) || ( false === $options ) ) {
-				return array();
-			}
 
-			if ( isset( $options['force_alts'] ) && ( 1 == $options['force_alts'] ) ) {
-				$options['force_alts'] = 1;
-			} else {
-				unset( $options['checkbox_example'] );
-			}
+			$options['force_alts'] = ! empty( $options['force_alts'] ) ? true : false;
 
 			return $options;
 		}

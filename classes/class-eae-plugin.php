@@ -26,12 +26,21 @@ if ( ! class_exists( 'EAE_Plugin' ) ) {
 			add_action( 'admin_footer', array( $this, 'eae_ajax_request' ) );
 			add_action( 'wp_ajax_eae', array( $this, 'eae_ajax_process' ) );
 
-			$options = get_option( 'eae_options' );
-
-			if ( isset( $options['force_alts'] ) && 1 == $options['force_alts'] ) {
+			if( self::force_alts() ){
 				add_filter( 'the_content', array( $this, 'eae_filter_the_content' ), 1 );
 			}
 		}
+
+
+		/**
+		 * Alt Check Force alts option.
+		 *
+		 * @since 1.0.0
+		 */
+		public function force_alts() {
+			return (bool) get_option( 'eae_options' )['force_alts'];
+		}
+
 
 		/**
 		 * Alt column.
@@ -68,26 +77,29 @@ if ( ! class_exists( 'EAE_Plugin' ) ) {
 				global $post;
 
 				if ( false !== strpos( $post->post_mime_type, 'image' ) ) {
-					$alt   = get_post_meta( $post->ID, '_wp_attachment_image_alt', true );
+
+					$safe_post_ID = (int) $post->ID;
+
+					$alt   = get_post_meta( $safe_post_ID, '_wp_attachment_image_alt', true );
 					$nonce = wp_create_nonce( 'eae-update' );
 					?>
 					<input
 						type="hidden"
 						name="eae-id"
-						value="<?php echo esc_attr( $post->ID ); ?>"
+						value="<?php esc_attr_e( $safe_post_ID ); ?>"
 					/>
 					<input
 						type="hidden"
 						name="eae-nonce"
-						value="<?php echo esc_attr( $nonce ); ?>"
+						value="<?php esc_attr_e( $nonce ); ?>"
 					/>
 					<input
 						type="text"
 						class="eae-field"
-						name="<?php echo esc_attr( 'eae-' . $post->ID ); ?>"
-						value="<?php echo esc_attr( $alt ); ?>"
+						name="<?php esc_attr_e( 'eae-' . $safe_post_ID ); ?>"
+						value="<?php esc_attr_e( $alt ); ?>"
 					/>
-					<button type="button" class="button eae-button" data-media-title="<?php echo esc_attr( $post->post_title ); ?>">
+					<button type="button" class="button eae-button" data-media-title="<?php esc_attr_e( $post->post_title ); ?>">
 						<?php esc_html_e( 'Use image title', 'eae' ); ?>
 					</button>
 					<?php
@@ -212,7 +224,7 @@ if ( ! class_exists( 'EAE_Plugin' ) ) {
 				$alt = get_post_meta( $post_id, '_wp_attachment_image_alt', true );
 
 				if ( ! empty( $alt ) ) {
-					$image_alt   = 'alt="' . $alt . '"';
+					$image_alt   = 'alt="' . esc_attr( $alt ) . '"';
 					$replace_tag = preg_replace( '/alt="([^"]*)"/', $image_alt, $match_tag );
 
 					if ( $match_tag !== $replace_tag ) {
