@@ -1,0 +1,31 @@
+{
+  "name": "wprank/ease-alt-edit",
+  "version": "1.0.0",
+  "description": "This extension allows you to easily and quickly manage alternate titles of your images directly from the media list.",
+  "type":"wordpress-plugin",
+  "authors": [
+    {
+      "name": "Nicolas Mercatili",
+      "email": "nicolas@creanico.fr"
+    },
+    {
+      "name": "Jorhel Bourdier",
+      "email": "jorhel.bdr@gmail.com"
+    }
+  ],
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "scripts": {
+    "wpcs": "./vendor/bin/phpcs -s",
+    "wpcbf": "./vendor/bin/phpcbf"
+  },
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+    "squizlabs/php_codesniffer": "^3.5",
+    "wp-coding-standards/wpcs": "^2.2"
+  }
+}
