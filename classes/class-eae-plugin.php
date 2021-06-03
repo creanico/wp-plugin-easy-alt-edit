@@ -26,7 +26,7 @@ if ( ! class_exists( 'EAE_Plugin' ) ) {
 			add_action( 'admin_footer', array( $this, 'eae_ajax_request' ) );
 			add_action( 'wp_ajax_eae', array( $this, 'eae_ajax_process' ) );
 
-			if( self::force_alts() ){
+			if ( $this->force_alts() ) {
 				add_filter( 'the_content', array( $this, 'eae_filter_the_content' ), 1 );
 			}
 		}

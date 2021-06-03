@@ -15,8 +15,17 @@
 
 defined( 'ABSPATH' ) || die( 'Cheating?' );
 
-define( 'EAE_URL', plugin_dir_url( __FILE__ ) );
-define( 'EAE_DIR', plugin_dir_path( __FILE__ ) );
+define( 'EAE_VERSION', '1.0.0' );
+define( 'EAE_API_URL', 'https://www.wprank.net/' );
+define( 'EAE_PLUGIN_URL', plugin_dir_path( __FILE__ ) );
+
+if ( ! class_exists( 'WC_AM_Client_2_7' ) ) {
+	require_once EAE_PLUGIN_URL . 'wc-am-client.php';
+}
+
+if ( class_exists( 'WC_AM_Client_2_7' ) ) {
+	$wcam_lib = new WC_AM_Client_2_7( __FILE__, '', EAE_VERSION, 'plugin', EAE_API_URL, 'Easy Alt Edit' );
+}
 
 if ( ! function_exists( 'eae_load_textdomain' ) ) {
 	/**
@@ -31,5 +40,5 @@ if ( ! function_exists( 'eae_load_textdomain' ) ) {
 
 add_action( 'plugins_loaded', 'eae_load_textdomain' );
 
-require_once EAE_DIR . 'classes/class-eae-options.php';
-require_once EAE_DIR . 'classes/class-eae-plugin.php';
+require_once EAE_PLUGIN_URL . 'classes/class-eae-options.php';
+require_once EAE_PLUGIN_URL . 'classes/class-eae-plugin.php';

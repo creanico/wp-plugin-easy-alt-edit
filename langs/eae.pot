@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Easy Alt Edit\n"
-"POT-Creation-Date: 2021-02-22 14:39+0100\n"
+"POT-Creation-Date: 2021-06-03 16:06+0200\n"
 "PO-Revision-Date: 2021-02-22 14:37+0100\n"
 "Last-Translator: Jorhel Bourdier <jorhel.bdr@gmail.com>\n"
 "Language-Team: Jorhel Bourdier <jorhel.bdr@gmail.com>\n"
@@ -23,27 +23,123 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
 #. Plugin Name of the plugin/theme
-#: classes/class-eae-options.php:72 classes/class-eae-options.php:73
+#: classes/class-eae-options.php:75 classes/class-eae-options.php:76
 msgid "Easy Alt Edit"
 msgstr ""
 
-#: classes/class-eae-options.php:96
+#: classes/class-eae-options.php:99
 msgid "force the use of alternative text from an image"
 msgstr ""
 
-#: classes/class-eae-options.php:101
+#: classes/class-eae-options.php:104
 msgid ""
 "If this option is checked, the alternative text entered from the \"Media\" "
 "tab will take priority over the alternative text entered from an article, a "
 "page ..."
 msgstr ""
 
-#: classes/class-eae-plugin.php:44
+#: classes/class-eae-plugin.php:53
 msgid "Alt Text"
 msgstr ""
 
-#: classes/class-eae-plugin.php:91
+#: classes/class-eae-plugin.php:103
 msgid "Use image title"
+msgstr ""
+
+#: wc-am-client.php:126 wc-am-client.php:127
+msgid " Activation"
+msgstr ""
+
+#: wc-am-client.php:128 wc-am-client.php:419
+msgid "API Key Activation"
+msgstr ""
+
+#: wc-am-client.php:129
+msgid "API Key Deactivation"
+msgstr ""
+
+#: wc-am-client.php:224
+msgid ""
+"Attempt to migrate data failed. Deactivate then reactive this plugin or "
+"theme, then enter your API Key on the settings screen to receive software "
+"updates. Contact support if assistance is required."
+msgstr ""
+
+#: wc-am-client.php:350
+#, php-format
+msgid ""
+"The <strong>%1$s</strong> API Key has not been activated, so the %2$s is "
+"inactive! %3$sClick here%4$s to activate <strong>%5$s</strong>."
+msgstr ""
+
+#: wc-am-client.php:368
+#, php-format
+msgid ""
+"<b>Warning!</b> You're blocking external requests which means you won't be "
+"able to get %1$s updates. Please add %2$s to %3$s."
+msgstr ""
+
+#: wc-am-client.php:400 wc-am-client.php:404
+msgid "Save Changes"
+msgstr ""
+
+#: wc-am-client.php:428
+msgid "API Key"
+msgstr ""
+
+#: wc-am-client.php:443
+msgid "Product ID"
+msgstr ""
+
+#: wc-am-client.php:455
+msgid "API Key Status"
+msgstr ""
+
+#: wc-am-client.php:474
+msgid "API Deactivation"
+msgstr ""
+
+#: wc-am-client.php:483
+msgid "Deactivate API Key"
+msgstr ""
+
+#: wc-am-client.php:501
+msgid "Activated"
+msgstr ""
+
+#: wc-am-client.php:505
+msgid "Deactivated"
+msgstr ""
+
+#: wc-am-client.php:623
+#, php-format
+msgid "%s activated. "
+msgstr ""
+
+#: wc-am-client.php:629
+msgid ""
+"Connection failed to the License Key API server. Try again later. There may "
+"be a problem on your server preventing outgoing requests, or the store is "
+"blocking your request to activate the plugin/theme."
+msgstr ""
+
+#: wc-am-client.php:659
+msgid "API Key deactivated. "
+msgstr ""
+
+#: wc-am-client.php:695
+msgid ""
+"The API Key could not be deactivated. Use the API Key Deactivation tab to "
+"manually deactivate the API Key before activating a new API Key. If all "
+"else fails, go to Plugins, then deactivate and reactivate this plugin, or "
+"if a theme change themes, then change back to this theme, then go to the "
+"Settings for this plugin/theme and enter the API Key information again to "
+"activate it. Also check the My Account dashboard to see if the API Key for "
+"this site was still active before the error message was displayed."
+msgstr ""
+
+#: wc-am-client.php:707
+msgid "Deactivates an API Key so it can be used on another blog."
 msgstr ""
 
 #. Plugin URI of the plugin/theme

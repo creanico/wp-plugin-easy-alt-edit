@@ -59,8 +59,8 @@ if ( ! class_exists( 'EAE_Options' ) ) {
 				'eae_options',
 				'eae_options',
 				array(
-					'type'				=> 'array',
-					'sanitize_callback' => [ $this, 'sanitize' ],
+					'type'              => 'array',
+					'sanitize_callback' => array( $this, 'sanitize' ),
 				)
 			);
 		}
@@ -99,7 +99,7 @@ if ( ! class_exists( 'EAE_Options' ) ) {
 								<?php esc_html_e( 'force the use of alternative text from an image', 'eae' ); ?>
 							</th>
 							<td>
-								<?php $value = (boolean) self::get_option( 'force_alts' ); ?>
+								<?php $value = (bool) self::get_option( 'force_alts' ); ?>
 								<input type="checkbox" name="eae_options[force_alts]" value="1" <?php checked( $value, 1 ); ?>>
 								<?php esc_html_e( 'If this option is checked, the alternative text entered from the "Media" tab will take priority over the alternative text entered from an article, a page ...', 'eae' ); ?>
 							</td>
