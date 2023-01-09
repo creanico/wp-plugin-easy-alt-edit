@@ -31,7 +31,6 @@ if ( ! class_exists( 'EAE_Plugin' ) ) {
 			}
 		}
 
-
 		/**
 		 * Alt Check Force alts option.
 		 *
@@ -40,7 +39,6 @@ if ( ! class_exists( 'EAE_Plugin' ) ) {
 		public function force_alts() {
 			return (bool) get_option( 'eae_options' )['force_alts'];
 		}
-
 
 		/**
 		 * Alt column.

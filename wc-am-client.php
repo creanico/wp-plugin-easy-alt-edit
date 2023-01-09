@@ -7,7 +7,7 @@
  * but are not limited to, the working concept, function, and behavior of this software,
  * the logical code structure and expression as written.
  *
- * @version       2.7
+ * @version       2.7.K2
  * @author        Todd Lahman LLC https://www.toddlahman.com/
  * @copyright     Copyright (c) Todd Lahman LLC (support@toddlahman.com)
  * @package       WooCommerce API Manager plugin and theme library
@@ -16,8 +16,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'WC_AM_Client_2_7' ) ) {
-	class WC_AM_Client_2_7 {
+if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
+	class WC_AM_Client_2_7K2 {
 
 		/**
 		 * Class args
@@ -33,7 +33,6 @@ if ( ! class_exists( 'WC_AM_Client_2_7' ) ) {
 		public $slug             = '';
 		public $software_title   = '';
 		public $software_version = '';
-		public $text_domain      = 'eae'; // For language translation.
 
 		/**
 		 * Class properties.
@@ -61,9 +60,15 @@ if ( ! class_exists( 'WC_AM_Client_2_7' ) ) {
 		public $wc_am_settings_title              = '';
 		public $wc_am_software_version            = '';
 
-		public function __construct( $file, $product_id, $software_version, $plugin_or_theme, $api_url, $software_title = '', $text_domain = '' ) {
-			$this->no_product_id   = empty( $product_id ) ? true : false;
-			$this->plugin_or_theme = esc_attr( $plugin_or_theme );
+		// Transient name
+		private static $transient_name = 'eae_license';
+
+		// License
+		private $license_data;
+
+		public function __construct( $file, $product_id, $software_version, $plugin_or_theme, $api_url, $software_title = '' ) {
+			$this->no_product_id   = empty( $product_id );
+			$this->plugin_or_theme = esc_attr( strtolower( $plugin_or_theme ) );
 
 			if ( $this->no_product_id ) {
 				$this->identifier        = $this->plugin_or_theme == 'plugin' ? dirname( untrailingslashit( plugin_basename( $file ) ) ) : get_stylesheet();
@@ -289,6 +294,7 @@ if ( ! class_exists( 'WC_AM_Client_2_7' ) ) {
 
 						delete_option( $option );
 					}
+					delete_transient( self::$transient_name );
 
 					restore_current_blog();
 				} else {
@@ -302,6 +308,7 @@ if ( ! class_exists( 'WC_AM_Client_2_7' ) ) {
 
 						delete_option( $option );
 					}
+					delete_transient( self::$transient_name );
 				}
 			}
 		}
@@ -326,7 +333,7 @@ if ( ! class_exists( 'WC_AM_Client_2_7' ) ) {
 		 * Displays an inactive notice when the software is inactive.
 		 */
 		public function inactive_notice() {
-			?>
+?>
 			<?php
 			/**
 			 * @since 2.5.1
@@ -412,7 +419,15 @@ if ( ! class_exists( 'WC_AM_Client_2_7' ) ) {
 
 		// Register settings
 		public function load_settings() {
-			register_setting( $this->data_key, $this->data_key, array( $this, 'validate_options' ) );
+			register_setting(
+				$this->data_key,
+				$this->data_key,
+				array(
+					$this,
+					'validate_options'
+				)
+			);
+
 			// API Key
 			add_settings_section(
 				$this->wc_am_api_key_key,
@@ -460,6 +475,43 @@ if ( ! class_exists( 'WC_AM_Client_2_7' ) ) {
 				$this->wc_am_activation_tab_key,
 				$this->wc_am_api_key_key
 			);
+
+			/**
+			 * @since 2.7.K2
+			 */
+			add_settings_field(
+				'licensee',
+				esc_html__( 'License owner', 'eae' ),
+				array(
+					$this,
+					'wc_am_api_licensee',
+				),
+				$this->wc_am_activation_tab_key,
+				$this->wc_am_api_key_key
+			);
+
+			add_settings_field(
+				'activation_max',
+				esc_html__( 'Activations', 'eae' ),
+				array(
+					$this,
+					'wc_am_api_activations',
+				),
+				$this->wc_am_activation_tab_key,
+				$this->wc_am_api_key_key
+			);
+
+			add_settings_field(
+				'expiration',
+				esc_html__( 'Expiration', 'eae' ),
+				array(
+					$this,
+					'wc_am_api_expiration',
+				),
+				$this->wc_am_activation_tab_key,
+				$this->wc_am_api_key_key
+			);
+
 			// Activation settings
 			register_setting(
 				$this->wc_am_deactivate_checkbox_key,
@@ -495,8 +547,6 @@ if ( ! class_exists( 'WC_AM_Client_2_7' ) ) {
 
 		// Returns the API Key status from the WooCommerce API Manager on the server
 		public function wc_am_api_key_status() {
-			$license_status_check = '';
-
 			if ( $this->get_api_key_status( true ) ) {
 				$license_status_check = esc_html__( 'Activated', 'eae' );
 				update_option( $this->wc_am_activated_key, 'Activated' );
@@ -508,13 +558,101 @@ if ( ! class_exists( 'WC_AM_Client_2_7' ) ) {
 			echo esc_attr( $license_status_check );
 		}
 
+		public function wc_am_api_activations() {
+			if ( is_array( $this->license_data ) ) {
+?>
+
+		<style>
+			table.wprank-activations { width: min-content; }
+			table.wprank-activations th { padding-bottom: 10px; padding-top: 0; text-align: center; }
+			table.wprank-activations td { padding-bottom: 10px; padding-top: 0; text-align: center; }
+		</style>
+		<table class="wprank-activations">
+			<thead>
+				<th><?php esc_html_e( 'Purchased', 'seomag' ); ?></th>
+				<th><?php esc_html_e( 'Used', 'seomag' ); ?></th>
+				<th><?php esc_html_e( 'Available', 'seomag' ); ?></th>
+			</thead>
+			<tbody>
+				<td><?php echo intval( $this->license_data['total_activations_purchased'] ); ?></td>
+				<td><?php echo intval( $this->license_data['total_activations'] ); ?></td>
+				<td><?php echo intval( $this->license_data['activations_remaining'] ); ?></td>
+			</tbody>
+		</table>
+
+<?php
+
+			} else {
+				echo '<span class="wprank-activations">';
+				esc_html_e( 'Data not available', 'seomag' );
+				echo '</span>';
+			}
+		}
+
 		/**
-		 * Returns the API Key status by querying the Status API function from the WooCommerce API Manager on the server.
+		 * Displays the licence expiration info
+		 *
+		 * This is a callback
+		 */
+		public function wc_am_api_expiration() {
+			if ( is_array( $this->license_data ) ) {
+				$date = $this->license_data['api_key_expirations']['non_wc_subs_resources'][0]['friendly_api_key_expiration_date'];
+				echo '<span class="wprank-expiration">';
+				echo esc_html( $date );
+				echo '</span>';
+			} else {
+				echo '<span class="wprank-expiration">';
+				esc_html_e( 'Data not available', 'seomag' );
+				echo '</span>';
+			}
+		}
+
+		/**
+		 * Displays the licence owner info
+		 *
+		 * This is a callback
+		 */
+		public function wc_am_api_licensee() {
+			$key = '5fde630da12164875f71291b1c4adb46d9db249f';
+			$key = $this->data[ $this->wc_am_api_key_key ];
+
+			$rest_url = $this->api_url . 'wp-json/wp-rank/v1/license/info/' . $key;
+			$url      = sanitize_url( $rest_url );
+			$request  = wp_safe_remote_get( $url, array( 'timeout' => 15 ) );
+
+			if ( ! is_wp_error( $request ) && wp_remote_retrieve_response_code( $request ) == 200 ) {
+				$owner = json_decode( wp_remote_retrieve_body( $request ) );
+				if ( is_object( $owner ) and ( 1 == $owner->success ) ) {
+					echo '<span class="wprank-licensee">';
+					echo esc_html( implode( ' ', array( $owner->first_name, $owner->last_name, $owner->billing_company ) ) );
+					echo '</span>';
+
+					return true;
+				}
+			}
+
+			// Something went wrong
+			echo '<span class="wprank-licensee">';
+			esc_html_e( 'Data not available', 'seomag' );
+			echo '</span>';
+		}
+
+		/**
+		 * Returns the API Key status
+		 *
+		 * Queries the Status API function from the WooCommerce API Manager on the server.
 		 *
 		 * @return array|mixed|object
 		 */
 		public function license_key_status() {
-			return json_decode( $this->status(), true );
+			$status   = $this->status();
+			$contents = json_decode( $status, true );
+			if ( isset( $contents['data'] ) ) {
+				$this->license_data = $contents['data'];
+			}
+
+			// More or less the original return statement
+			return ! empty( $status ) ? json_decode( $status, true ) : $status;
 		}
 
 		/**
@@ -527,6 +665,7 @@ if ( ! class_exists( 'WC_AM_Client_2_7' ) ) {
 		 * @return bool
 		 */
 		public function get_api_key_status( $live = false ) {
+
 			/**
 			 * Real-time result.
 			 *
@@ -757,6 +896,10 @@ if ( ! class_exists( 'WC_AM_Client_2_7' ) ) {
 		 * @return bool|string
 		 */
 		public function deactivate( $args ) {
+
+			// Delete obsolete license data
+			delete_transient( self::$transient_name );
+
 			$defaults = array(
 				'wc_am_action' => 'deactivate',
 				'product_id'   => $this->product_id,
@@ -770,21 +913,41 @@ if ( ! class_exists( 'WC_AM_Client_2_7' ) ) {
 
 			if ( is_wp_error( $request ) || wp_remote_retrieve_response_code( $request ) != 200 ) {
 				// Request failed
-				return false;
+				return '';
 			}
 
-			$response = wp_remote_retrieve_body( $request );
-
-			return $response;
+			return wp_remote_retrieve_body( $request );
 		}
 
 		/**
 		 * Sends the status check request to the API Manager.
 		 *
-		 * @return bool|string
+		 * @return string
 		 */
 		public function status() {
-			$defaults = array(
+			if ( empty( $this->data[ $this->wc_am_api_key_key ] ) ) {
+				return '';
+			}
+
+			/**
+			 * Use a transient
+			 */
+			$license_data = get_transient( self::$transient_name );
+			if ( ! $license_data ) {
+				$license_data = self::fetch_license_data();
+				set_transient( self::$transient_name, $license_data, 24 * HOUR_IN_SECONDS );
+			}
+
+			return $license_data;
+		}
+
+		/**
+		 * Retrieves the license status from the server.
+		 *
+		 * @return string
+		 */
+		private function fetch_license_data() {
+			$args = array(
 				'wc_am_action' => 'status',
 				'api_key'      => $this->data[ $this->wc_am_api_key_key ],
 				'product_id'   => $this->product_id,
@@ -792,17 +955,32 @@ if ( ! class_exists( 'WC_AM_Client_2_7' ) ) {
 				'object'       => $this->wc_am_domain,
 			);
 
-			$target_url = esc_url_raw( $this->create_software_api_url( $defaults ) );
+			$target_url = esc_url_raw( $this->create_software_api_url( $args ) );
 			$request    = wp_safe_remote_post( $target_url, array( 'timeout' => 15 ) );
 
 			if ( is_wp_error( $request ) || wp_remote_retrieve_response_code( $request ) != 200 ) {
-				// Request failed
-				return false;
+				return '';
 			}
 
-			$response = wp_remote_retrieve_body( $request );
+			return wp_remote_retrieve_body( $request );
+		}
 
-			return $response;
+		/**
+		 * Retrieves the license owner from the server.
+		 *
+		 * @return string
+		 */
+		private function fetch_license_owner() {
+			$args = array(
+				'wc_am_action' => 'status',
+				'api_key'      => $this->data[ $this->wc_am_api_key_key ],
+				'product_id'   => $this->product_id,
+				'instance'     => $this->wc_am_instance_id,
+				'object'       => $this->wc_am_domain,
+			);
+
+			$target_url = esc_url_raw( $this->create_software_api_url( $args ) );
+			dump( $target_url );
 		}
 
 		/**
