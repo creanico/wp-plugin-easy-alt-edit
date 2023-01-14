@@ -42,13 +42,6 @@ class AdminSubMenu {
     public static $admin_page;
 
     /**
-     * The views directory
-     *
-     * @var string
-     */
-    public static $views_dir;
-
-    /**
      * The navigation tabs
      *
      * @var array
@@ -203,7 +196,7 @@ class AdminSubMenu {
 
         // Instantiante WC_AM_Client
         $class_name = '\\' . self::$licence_client;
-        $client = new $class_name( $plugin, '', EAE_VERSION, 'plugin', EAE_API_URL, 'Easy Alt Edit' );
+        $client = new $class_name( $plugin, '', EAE_VERSION, 'plugin', WPRANK_API_URL, 'Easy Alt Edit' );
 
         echo '<form action="options.php" method="post">';
         settings_fields( $client->data_key );
@@ -222,7 +215,7 @@ class AdminSubMenu {
 
         // Instantiante WC_AM_Client
         $class_name = '\\' . self::$licence_client;
-        $client = new $class_name( $plugin, '', EAE_VERSION, 'plugin', EAE_API_URL, 'Easy Alt Edit' );
+        $client = new $class_name( $plugin, '', EAE_VERSION, 'plugin', WPRANK_API_URL, 'Easy Alt Edit' );
 
         echo '<form action="options.php" method="post">';
         settings_fields( $client->wc_am_deactivate_checkbox_key );

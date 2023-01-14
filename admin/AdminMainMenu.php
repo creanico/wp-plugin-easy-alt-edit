@@ -25,6 +25,13 @@ class AdminMainMenu {
     public static $home = 'wp-rank';
 
     /**
+     * The views directory
+     *
+     * @var string
+     */
+    public static $views_dir = EAE_PLUGIN_PATH . 'views/';
+
+    /**
      * The hook suffix for the main menu
      *
      * @var string
@@ -70,15 +77,20 @@ class AdminMainMenu {
      * Common main menu page
      */
     public static function display_main_page() {
-        if ( ! current_user_can( 'manage_options' ) ) {
-            return;
-        }
 
-        echo '<div class="wrap">';
-        echo '<h1>' . esc_html_x( 'WP Rank', 'Admin — Page title', 'eae' ) . '<h1>';
-        echo '<p>Ici mettre une présentation de la gamme de produits de WP Rank<p>';
-        echo '<p>Faire une vue ?<p>';
-        echo '</div>';
+        // Retrieve main page with its embedded content from WP Rank website
+        $response = wp_remote_get( WPRANK_API_URL . 'wp-json/wp/v2/pages?slug=a-propos-admin&_embed', array(
+            'timeout' => 20,
+        ) );
+        $data = wp_remote_retrieve_body( $response );
+        $pages = json_decode( $data );
+        $page  = $pages[0];
+
+        // Variables used in the view
+        $title   = $page->title->rendered;
+        $content = $page->content->rendered;
+
+        require self::$views_dir . 'admin-mainpage.inc';
     }
 
     /**
