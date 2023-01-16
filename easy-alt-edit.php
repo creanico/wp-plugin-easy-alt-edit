@@ -17,7 +17,9 @@ defined( 'ABSPATH' ) || die( 'Cheating?' );
 
 define( 'EAE_VERSION', '1.1.0' );
 define( 'EAE_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
-define( 'WPRANK_API_URL', 'https://www.wprank.net/' );
+if ( ! defined( 'WPRANK_API_URL' ) ) {
+	define( 'WPRANK_API_URL', 'https://www.wprank.net/' );
+}
 
 if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 	require_once EAE_PLUGIN_PATH . 'wc-am-client.php';
