@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: Easy Alt Edit
- * Version: 1.1.0
+ * Plugin Name: Easy ALT Edit
+ * Version: 1.1.1
  * Description: This extension allows you to easily and quickly manage alternate titles of your images directly from the media list.
  * Plugin URI: https://www.wprank.net
  * Text Domain: eae
@@ -9,13 +9,12 @@
  * Author: CreaNico / WP Rank
  * Author URI: https://www.creanico.fr
  *
- * @version 1.1.0
- * @package Easy Alt Text Edit
+ * @version 1.1.1
  */
 
 defined( 'ABSPATH' ) || die( 'Cheating?' );
 
-define( 'EAE_VERSION', '1.1.0' );
+define( 'EAE_VERSION', '1.1.1' );
 define( 'EAE_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 if ( ! defined( 'WPRANK_API_URL' ) ) {
 	define( 'WPRANK_API_URL', 'https://www.wprank.net/' );
@@ -26,7 +25,7 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 }
 
 if ( class_exists( 'WC_AM_Client_2_7K2' ) ) {
-	$wcam_lib = new WC_AM_Client_2_7K2( __FILE__, '', EAE_VERSION, 'plugin', WPRANK_API_URL, 'Easy Alt Edit' );
+	$wcam_lib = new WC_AM_Client_2_7K2( __FILE__, '', EAE_VERSION, 'plugin', WPRANK_API_URL, 'Easy ALT Edit' );
 }
 
 if ( ! function_exists( 'eae_load_textdomain' ) ) {
@@ -70,7 +69,7 @@ function abw_expiration_prochaine_eae() {
 	if( !empty($access_expires) ) $strtotime_access_expires = strtotime($access_expires);
 	if( !empty($access_expires) && checkdate( date('m', $strtotime_access_expires), date('d', $strtotime_access_expires), date('Y', $strtotime_access_expires) ) && $strtotime_access_expires>time() && $strtotime_access_expires<(time()+15*24*3600) ): // Définir ici le nombre de jour pour déclencher la fenêtre d'information
 		$class = 'notice notice-warning is-dismissible';
-		$titre = __( "Your Easy Alt Edit license expires in", 'eae' )." ";
+		$titre = __( "Your Easy ALT Edit license expires in", 'eae' )." ";
 		$message = __( "After expiration, you will no longer have access to updates and support.", 'eae' );
 		$bouton = sprintf( __( "Extend your license with 40%% off before the %s!", 'eae' ), date('d/m/Y', $strtotime_access_expires) );
 		$script = '<script>var countDownDate = new Date("'.$access_expires.'").getTime(); var x = setInterval(function() { var maintenant = new Date(); var now = maintenant.getTime(); var distance = countDownDate - now +(maintenant.getTimezoneOffset()*60*1000); var days = Math.floor(distance / (1000 * 60 * 60 * 24)); var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); var seconds = Math.floor((distance % (1000 * 60)) / 1000); document.getElementById("abw_countdown_monetico").innerHTML = days + " jour"+(days>1?"s":"")+ " " + (hours>0?("0" + hours).slice(-2):"0") + " heure"+(hours>1?"s":"")+ " " + (minutes>0?("0" + minutes).slice(-2):"0") + " minute"+(minutes>1?"s":"")+ " et " + ("0" + seconds).slice(-2) + " seconde"+(seconds>1?"s":""); if (distance < 0) {  clearInterval(x); document.getElementById("abw_countdown_monetico").innerHTML = "EXPIRÉE"; } }, 1000);</script>';

@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"Project-Id-Version: Easy Alt Edit\n"
+"Project-Id-Version: Easy ALT Edit\n"
 "POT-Creation-Date: 2021-06-03 16:06+0200\n"
 "PO-Revision-Date: 2021-02-22 14:37+0100\n"
 "Last-Translator: Jorhel Bourdier <jorhel.bdr@gmail.com>\n"
@@ -24,7 +24,7 @@ msgstr ""
 
 #. Plugin Name of the plugin/theme
 #: classes/class-eae-options.php:75 classes/class-eae-options.php:76
-msgid "Easy Alt Edit"
+msgid "Easy ALT Edit"
 msgstr ""
 
 #: classes/class-eae-options.php:99

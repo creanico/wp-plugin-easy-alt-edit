@@ -11,7 +11,7 @@
 </style>
 <div class="wrap">
     <h1>
-        <?php echo $title; ?> (Easy Alt Edit)
+        <?php echo $title; ?> (Easy ALT Edit)
     </h1>
     <div class="content">
         <?php echo $content; ?>

@@ -1,6 +1,6 @@
 <?php
 /**
- * Easy Alt Edit - Plugin
+ * Easy ALT Edit - Plugin
  *
  * @package   EasyAltEdit
  * @link      https://www.wprank.net/

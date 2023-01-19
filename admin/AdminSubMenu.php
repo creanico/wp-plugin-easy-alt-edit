@@ -93,8 +93,8 @@ class AdminSubMenu {
         // Create submenu
         add_submenu_page(
             self::$home,
-            _x( 'Easy Alt Edit', 'Admin — Page title', 'eae' ),
-            _x( 'Easy Alt Edit', 'Admin — Menu name', 'eae' ),
+            _x( 'Easy ALT Edit', 'Admin — Page title', 'eae' ),
+            _x( 'Easy ALT Edit', 'Admin — Menu name', 'eae' ),
             'manage_options',
             self::$home . '-' . self::$slug,
             array( $this, 'settings_page_content' )
@@ -145,7 +145,7 @@ class AdminSubMenu {
 ?>
 
         <div class="wrap wprank-admin">
-            <h1>Easy Alt Edit [<?php esc_html_e( EAE_VERSION ); ?>]</h1>
+            <h1>Easy ALT Edit [<?php esc_html_e( EAE_VERSION ); ?>]</h1>
             <nav class="nav-tab-wrapper">
                 <?php $this->display_tab_nav( $active ); ?>
             </nav>
@@ -196,7 +196,7 @@ class AdminSubMenu {
 
         // Instantiante WC_AM_Client
         $class_name = '\\' . self::$licence_client;
-        $client = new $class_name( $plugin, '', EAE_VERSION, 'plugin', WPRANK_API_URL, 'Easy Alt Edit' );
+        $client = new $class_name( $plugin, '', EAE_VERSION, 'plugin', WPRANK_API_URL, 'Easy ALT Edit' );
 
         echo '<form action="options.php" method="post">';
         settings_fields( $client->data_key );
@@ -215,7 +215,7 @@ class AdminSubMenu {
 
         // Instantiante WC_AM_Client
         $class_name = '\\' . self::$licence_client;
-        $client = new $class_name( $plugin, '', EAE_VERSION, 'plugin', WPRANK_API_URL, 'Easy Alt Edit' );
+        $client = new $class_name( $plugin, '', EAE_VERSION, 'plugin', WPRANK_API_URL, 'Easy ALT Edit' );
 
         echo '<form action="options.php" method="post">';
         settings_fields( $client->wc_am_deactivate_checkbox_key );

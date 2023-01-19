@@ -1,4 +1,4 @@
-# Easy Alt Edit
+# Easy ALT Edit
 
 This extension allows you to easily and quickly manage alternate titles of your images directly from the media list in WordPress.
 It's currently under development. Feel free to contribute.
