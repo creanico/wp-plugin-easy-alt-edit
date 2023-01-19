@@ -78,19 +78,25 @@ function abw_expiration_prochaine_eae() {
 	endif;
 }
 if(!function_exists('abw_recuperation_date_expiration')):
-	function abw_recuperation_date_expiration($tab) {
+	function abw_recuperation_date_expiration( $tab ) {
+
 		// Si un client à acheté plusieurs licences d'une même variation sur des dommandes différentes, on ne peut pas déterminer la bonne date à utiliser si il utilise sa clé de licence globale.
 		// Si il utilise sa clé de licence produit/commande, pas de problème, une seule date va remonter
 		// Si il y a plus d'une date qui remonte, on ne veux pas afficher la notice, on renvoi une date vide
-		$nb_achats = count($tab['data']['api_key_expirations']['non_wc_subs_resources']);
-		if($nb_achats==1):
-			$time = $tab['data']['api_key_expirations']['non_wc_subs_resources'][0]['friendly_api_key_expiration_date']; // 24 octobre 2023 13h11
-			// Convertion de la date textuelle française en date standardisée
-			$dateTime = \DateTime::createFromFormat('U', \IntlDateFormatter::create('fr', null, null, null, null, "d MMMM y kk'h'mm")->parse( $time ));
-			$formattedDate = $dateTime->format('Y-m-d H:i');
-			return $formattedDate;
-		else:
-			return '';
-		endif;
+		$nb_achats = count( $tab['data']['api_key_expirations']['non_wc_subs_resources'] );
+		if ( $nb_achats == 1 ) {
+			$time = $tab['data']['api_key_expirations']['non_wc_subs_resources'][0]['friendly_api_key_expiration_date']; // ex. 24 octobre 2023 13h11
+
+			// Conversion de la date textuelle française en date standardisée
+			$parsedTime = \IntlDateFormatter::create( 'fr', null, null, null, null, "d MMMM y kk'h'mm" )->parse( $time );
+			if ( $parsedTime ) {
+				$dateTime = \DateTime::createFromFormat( 'U', $parsedTime );
+				$formattedDate = $dateTime->format( 'Y-m-d H:i' );
+
+				return $formattedDate;
+			}
+		}
+
+		return '';
 	}
 endif;
