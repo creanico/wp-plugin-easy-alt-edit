@@ -70,6 +70,15 @@ class AdminMainMenu {
                 'dashicons-performance',
                 self::$menu_position
             );
+
+            add_submenu_page(
+                self::$home,
+                _x( 'About', 'Admin — Page title', 'eae' ),
+                _x( 'About', 'Admin — Submenu name', 'eae' ),
+                'manage_options',
+                self::$home,
+                array( __CLASS__, 'display_main_page' )
+            );
         }
     }
 

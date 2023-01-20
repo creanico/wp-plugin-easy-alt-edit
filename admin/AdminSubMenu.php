@@ -97,7 +97,8 @@ class AdminSubMenu {
             _x( 'Easy ALT Edit', 'Admin — Menu name', 'eae' ),
             'manage_options',
             self::$home . '-' . self::$slug,
-            array( $this, 'settings_page_content' )
+            array( $this, 'settings_page_content' ),
+            -1
         );
 
         // Must be called after menu creation
