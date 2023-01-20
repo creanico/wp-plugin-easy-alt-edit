@@ -595,6 +595,7 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		 * This is a callback
 		 */
 		public function wc_am_api_expiration() {
+			elog( $this->license_data, 'license data' );
 			if ( is_array( $this->license_data ) ) {
 				$date = $this->license_data['api_key_expirations']['non_wc_subs_resources'][0]['friendly_api_key_expiration_date'];
 				echo '<span class="wprank-expiration">';

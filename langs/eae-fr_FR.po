@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Easy ALT Edit\n"
-"POT-Creation-Date: 2021-06-03 16:10+0200\n"
-"PO-Revision-Date: 2021-06-03 16:13+0200\n"
+"POT-Creation-Date: 2023-01-20 16:57+0100\n"
+"PO-Revision-Date: 2023-01-20 16:57+0100\n"
 "Last-Translator: Jorhel Bourdier <jorhel.bdr@gmail.com>\n"
 "Language-Team: Jorhel Bourdier <jorhel.bdr@gmail.com>\n"
 "Language: fr_FR\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: easy-alt-edit.php\n"
@@ -22,16 +22,56 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
-#. Plugin Name of the plugin/theme
-#: classes/class-eae-options.php:75 classes/class-eae-options.php:76
+#: admin/AdminMainMenu.php:65
+msgctxt "Admin — Page title"
+msgid "WP Rank"
+msgstr "WP Rank"
+
+#: admin/AdminMainMenu.php:66
+msgctxt "Admin — Menu name"
+msgid "WP Rank"
+msgstr "WP Rank"
+
+#: admin/AdminMainMenu.php:76
+msgctxt "Admin — Page title"
+msgid "About"
+msgstr "À propos"
+
+#: admin/AdminMainMenu.php:77
+msgctxt "Admin — Submenu name"
+msgid "About"
+msgstr "À propos"
+
+#: admin/AdminSubMenu.php:78
+msgctxt "Admin — tab name"
+msgid "Settings"
+msgstr "Réglages"
+
+#: admin/AdminSubMenu.php:79
+msgctxt "Admin — tab name"
+msgid "API Key Activation"
+msgstr "Activation de la clé API"
+
+#: admin/AdminSubMenu.php:80
+msgctxt "Admin — tab name"
+msgid "API Key Deactivation"
+msgstr "Désactivation de la clé API"
+
+#: admin/AdminSubMenu.php:101
+msgctxt "Admin — Page title"
 msgid "Easy ALT Edit"
 msgstr "Easy ALT Edit"
 
-#: classes/class-eae-options.php:99
-msgid "force the use of alternative text from an image"
-msgstr "forcer l’utilisation de texte alternatif de l'image"
+#: admin/AdminSubMenu.php:102
+msgctxt "Admin — Menu name"
+msgid "Easy ALT Edit"
+msgstr "Easy ALT Edit"
 
-#: classes/class-eae-options.php:104
+#: admin/AdminSubMenu.php:178
+msgid "Force the use of alternative text from an image"
+msgstr "Forcer l’utilisation de texte alternatif de l'image"
+
+#: admin/AdminSubMenu.php:183
 msgid ""
 "If this option is checked, the alternative text entered from the \"Media\" "
 "tab will take priority over the alternative text entered from an article, a "
@@ -41,27 +81,51 @@ msgstr ""
 "« Médias » aura la priorité sur le texte alternatif saisi à partir d’un "
 "article, d’une page..."
 
-#: classes/class-eae-plugin.php:53
+#: admin/AdminSubMenu.php:210 admin/AdminSubMenu.php:229 wc-am-client.php:407
+#: wc-am-client.php:411
+msgid "Save Changes"
+msgstr "Sauvegarder les changements"
+
+#: admin/class-eae-plugin.php:51
 msgid "Alt Text"
 msgstr "Texte alternatif"
 
-#: classes/class-eae-plugin.php:103
+#: admin/class-eae-plugin.php:97
+msgid "eae-"
+msgstr ""
+
+#: admin/class-eae-plugin.php:101
 msgid "Use image title"
 msgstr "Utiliser le titre de l’image"
 
-#: wc-am-client.php:126 wc-am-client.php:127
+#: easy-alt-edit.php:72
+msgid "Your Easy ALT Edit license expires in"
+msgstr "Votre licence Easy ALT Edit expire dans"
+
+#: easy-alt-edit.php:73
+msgid ""
+"After expiration, you will no longer have access to updates and support."
+msgstr ""
+"Après expiration, vous n’aurez plus accès au support ni aux mises à jour."
+
+#: easy-alt-edit.php:74
+#, php-format
+msgid "Extend your license with 40%% off before the %s!"
+msgstr "Prolongez votre licence avec une réduction de 40%% avant le %s !"
+
+#: wc-am-client.php:131 wc-am-client.php:132
 msgid " Activation"
 msgstr " Activation"
 
-#: wc-am-client.php:128 wc-am-client.php:419
+#: wc-am-client.php:133 wc-am-client.php:434
 msgid "API Key Activation"
 msgstr "Activation de la clé API"
 
-#: wc-am-client.php:129
+#: wc-am-client.php:134
 msgid "API Key Deactivation"
 msgstr "Désactivation de la clé API"
 
-#: wc-am-client.php:224
+#: wc-am-client.php:229
 msgid ""
 "Attempt to migrate data failed. Deactivate then reactive this plugin or "
 "theme, then enter your API Key on the settings screen to receive software "
@@ -72,62 +136,86 @@ msgstr ""
 "recevoir les mises à jour logicielles. Contactez le support si une "
 "assistance est nécessaire."
 
-#: wc-am-client.php:350
+#: wc-am-client.php:357
 #, php-format
 msgid ""
 "The <strong>%1$s</strong> API Key has not been activated, so the %2$s is "
 "inactive! %3$sClick here%4$s to activate <strong>%5$s</strong>."
 msgstr ""
-"La clé API <strong>%s</strong> n'a pas été activée, donc %s est inactif ! "
+"La clé API <strong>%s</strong> n'a pas été activée, donc %s est inactif. "
 "%sCliquez ici%s pour activer <strong>%s</strong>."
 
-#: wc-am-client.php:368
+#: wc-am-client.php:375
 #, php-format
 msgid ""
 "<b>Warning!</b> You're blocking external requests which means you won't be "
 "able to get %1$s updates. Please add %2$s to %3$s."
 msgstr ""
-"<b>Attention !</b> Vous bloquez les requêtes externes, ce qui signifie que "
+"<b>Attention !</b> Vous bloquez les requêtes externes, ce qui signifie que "
 "vous ne pourrez pas obtenir les mises à jour de %s. Veuillez ajouter %s à %s."
 
-#: wc-am-client.php:400 wc-am-client.php:404
-msgid "Save Changes"
-msgstr "Sauvegarder les changements"
-
-#: wc-am-client.php:428
+#: wc-am-client.php:443
 msgid "API Key"
 msgstr "Clé API"
 
-#: wc-am-client.php:443
+#: wc-am-client.php:458
 msgid "Product ID"
 msgstr "ID produit"
 
-#: wc-am-client.php:455
+#: wc-am-client.php:470
 msgid "API Key Status"
 msgstr "Statut de la clé API"
 
-#: wc-am-client.php:474
+#: wc-am-client.php:484
+msgid "License owner"
+msgstr "Titulaire de la licence"
+
+#: wc-am-client.php:495
+msgid "Activations"
+msgstr "Activations"
+
+#: wc-am-client.php:506
+msgid "Expiration"
+msgstr "Expiration"
+
+#: wc-am-client.php:526
 msgid "API Deactivation"
 msgstr "Désactivation de l'API"
 
-#: wc-am-client.php:483
+#: wc-am-client.php:535
 msgid "Deactivate API Key"
 msgstr "Désactiver de la clé API"
 
-#: wc-am-client.php:501
+#: wc-am-client.php:551
 msgid "Activated"
 msgstr "Activée"
 
-#: wc-am-client.php:505
+#: wc-am-client.php:555
 msgid "Deactivated"
 msgstr "Désactivée"
 
-#: wc-am-client.php:623
+#: wc-am-client.php:572
+msgid "Purchased"
+msgstr "Achetée(s)"
+
+#: wc-am-client.php:573
+msgid "Used"
+msgstr "Utilisée(s)"
+
+#: wc-am-client.php:574
+msgid "Available"
+msgstr "Disponible(s)"
+
+#: wc-am-client.php:587 wc-am-client.php:605 wc-am-client.php:636
+msgid "Data not available"
+msgstr "Information non disponible"
+
+#: wc-am-client.php:762
 #, php-format
 msgid "%s activated. "
 msgstr "%s activée. "
 
-#: wc-am-client.php:629
+#: wc-am-client.php:768
 msgid ""
 "Connection failed to the License Key API server. Try again later. There may "
 "be a problem on your server preventing outgoing requests, or the store is "
@@ -137,11 +225,11 @@ msgstr ""
 "Il peut y avoir un problème sur votre serveur empêchant les demandes "
 "sortantes, ou le magasin bloque votre demande d'activation du plugin / thème."
 
-#: wc-am-client.php:659
+#: wc-am-client.php:798
 msgid "API Key deactivated. "
 msgstr "Clé API désactivée. "
 
-#: wc-am-client.php:695
+#: wc-am-client.php:834
 msgid ""
 "The API Key could not be deactivated. Use the API Key Deactivation tab to "
 "manually deactivate the API Key before activating a new API Key. If all else "
@@ -160,10 +248,14 @@ msgstr ""
 "de bord Mon compte pour voir si la clé API de ce site était toujours active "
 "avant l'affichage du message d'erreur."
 
-#: wc-am-client.php:707
+#: wc-am-client.php:846
 msgid "Deactivates an API Key so it can be used on another blog."
 msgstr ""
 "Désactive une clé API afin qu'elle puisse être utilisée sur un autre blog."
+
+#. Plugin Name of the plugin/theme
+msgid "Easy ALT Edit"
+msgstr "Easy ALT Edit"
 
 #. Plugin URI of the plugin/theme
 msgid "https://www.wprank.net"
@@ -184,3 +276,15 @@ msgstr "CreaNico / WP Rank"
 #. Author URI of the plugin/theme
 msgid "https://www.creanico.fr"
 msgstr "https://www.creanico.fr"
+
+#, fuzzy
+#~| msgid "API Key Activation"
+#~ msgctxt "eae"
+#~ msgid "API Key Activation"
+#~ msgstr "Activation de la clé API"
+
+#, fuzzy
+#~| msgid "API Key Deactivation"
+#~ msgctxt "eae"
+#~ msgid "API Key Deactivation"
+#~ msgstr "Désactivation de la clé API"

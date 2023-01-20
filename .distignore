@@ -1,0 +1,8 @@
+.distignore
+.editorconfig
+.DS_Store
+.git
+.gitignore
+composer.json
+composer.lock
+phpcs.xml

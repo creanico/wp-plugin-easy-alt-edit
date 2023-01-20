@@ -46,7 +46,7 @@ class AdminSubMenu {
      *
      * @var array
      */
-    public static $tabs;
+    public static $tabs = array();
 
     /**
      * The class name for the Licence client
@@ -60,13 +60,6 @@ class AdminSubMenu {
      */
     public function __construct()
     {
-        self::$tabs = array();
-        self::$tabs['settings']     = [ 'name' => _x( 'Settings', 'Admin — tab name', 'eae'),             'callback' => 'display_tab_settings' ];
-        self::$tabs['activation']   = [ 'name' => _x( 'API Key Activation', 'Admin — tab name', 'eae'),   'callback' => 'display_tab_activation' ];
-        self::$tabs['deactivation'] = [ 'name' => _x( 'API Key Deactivation', 'Admin — tab name', 'eae'), 'callback' => 'display_tab_deactivation' ];
-
-        self::$default_tab = array_keys( self::$tabs )[0];
-
         add_action( 'admin_init', array( $this, 'setup_settings' ) );
     }
 
@@ -76,6 +69,7 @@ class AdminSubMenu {
     public function run() {
         add_action( 'admin_menu', array( $this, 'init' ) );
     }
+
 
     /**
      * Initialize the admin menu
@@ -89,6 +83,8 @@ class AdminSubMenu {
 
         // Create the main WP Rank menu if it does not exist yet
         AdminMainMenu::create_main_menu();
+
+        $this->setup_tabs();
 
         // Create submenu
         add_submenu_page(
@@ -170,7 +166,7 @@ class AdminSubMenu {
                 <table class="form-table">
                     <tr valign="top">
                         <th scope="row">
-                            <?php esc_html_e( 'force the use of alternative text from an image', 'eae' ); ?>
+                            <?php esc_html_e( 'Force the use of alternative text from an image', 'eae' ); ?>
                         </th>
                         <td>
                             <?php $value = (bool) get_option( 'eae_options' )['force_alts']; ?>
@@ -223,6 +219,17 @@ class AdminSubMenu {
         do_settings_sections( $client->wc_am_deactivation_tab_key );
         submit_button( esc_html__( 'Save Changes', 'eae' ) );
         echo '</form>';
+    }
+
+    /**
+     * Define tabs
+     */
+    private function setup_tabs() {
+        self::$tabs['settings']     = [ 'name' => _x( 'Settings', 'Admin — tab name', 'eae'),             'callback' => 'display_tab_settings' ];
+        self::$tabs['activation']   = [ 'name' => _x( 'API Key Activation', 'Admin — tab name', 'eae'),   'callback' => 'display_tab_activation' ];
+        self::$tabs['deactivation'] = [ 'name' => _x( 'API Key Deactivation', 'Admin — tab name', 'eae'), 'callback' => 'display_tab_deactivation' ];
+
+        self::$default_tab = array_keys( self::$tabs )[0];
     }
 
     /**
