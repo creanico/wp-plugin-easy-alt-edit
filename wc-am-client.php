@@ -294,8 +294,6 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 
 						delete_option( $option );
 					}
-					delete_transient( self::$transient_name );
-
 					restore_current_blog();
 				} else {
 					foreach (
@@ -308,7 +306,6 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 
 						delete_option( $option );
 					}
-					delete_transient( self::$transient_name );
 				}
 			}
 		}
@@ -595,7 +592,6 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		 * This is a callback
 		 */
 		public function wc_am_api_expiration() {
-			elog( $this->license_data, 'license data' );
 			if ( is_array( $this->license_data ) ) {
 				$date = $this->license_data['api_key_expirations']['non_wc_subs_resources'][0]['friendly_api_key_expiration_date'];
 				echo '<span class="wprank-expiration">';
@@ -689,9 +685,9 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		// Returns API Key text field
 		public function wc_am_api_key_field() {
 			if ( ! empty( $this->data[ $this->wc_am_api_key_key ] ) ) {
-				echo "<input id='api_key' name='" . esc_attr( $this->data_key ) . '[' . esc_attr( $this->wc_am_api_key_key ) . "]' size='25' type='text' value='" . esc_attr( $this->data[ $this->wc_am_api_key_key ] ) . "' />";
+				echo "<input id='api_key' name='" . esc_attr( $this->data_key ) . '[' . esc_attr( $this->wc_am_api_key_key ) . "]' size='36' type='text' value='" . esc_attr( $this->data[ $this->wc_am_api_key_key ] ) . "' />";
 			} else {
-				echo "<input id='api_key' name='" . esc_attr( $this->data_key ) . '[' . esc_attr( $this->wc_am_api_key_key ) . "]' size='25' type='text' value='' />";
+				echo "<input id='api_key' name='" . esc_attr( $this->data_key ) . '[' . esc_attr( $this->wc_am_api_key_key ) . "]' size='36' type='text' value='' />";
 			}
 		}
 
@@ -706,9 +702,9 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 			}
 
 			if ( ! empty( $product_id ) ) {
-				echo "<input id='product_id' name='" . esc_attr( $this->wc_am_product_id ) . "' size='25' type='text' value='" . absint( $this->product_id ) . "' />";
+				echo "<input id='product_id' name='" . esc_attr( $this->wc_am_product_id ) . "' size='8' type='text' value='" . absint( $this->product_id ) . "' />";
 			} else {
-				echo "<input id='product_id' name='" . esc_attr( $this->wc_am_product_id ) . "' size='25' type='text' value='' />";
+				echo "<input id='product_id' name='" . esc_attr( $this->wc_am_product_id ) . "' size='8' type='text' value='' />";
 			}
 		}
 
@@ -886,6 +882,10 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 
 			$response = wp_remote_retrieve_body( $request );
 
+			// Update licence transient
+			$license_data = self::fetch_license_data();
+			set_transient( self::$transient_name, $license_data, 24 * HOUR_IN_SECONDS );
+
 			return $response;
 		}
 
@@ -999,7 +999,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 
 			/*********************************************************************
 			 * The plugin and theme filters should not be active at the same time
-			 */ /**
+			 */
+			/**
 			 * More info:
 			 * function set_site_transient moved from wp-includes/functions.php
 			 * to wp-includes/option.php in WordPress 3.4
@@ -1028,7 +1029,6 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 
 				// Check For Theme Information to display on the update details page
 				// add_filter( 'themes_api', array( $this, 'information_request' ), 10, 3 );
-
 			}
 		}
 

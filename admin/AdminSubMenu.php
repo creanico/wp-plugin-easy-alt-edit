@@ -53,7 +53,7 @@ class AdminSubMenu {
      *
      * @var string
      */
-    private static $licence_client = 'WC_AM_Client_2_7K1';
+    private static $licence_client = 'WC_AM_Client_2_7K2';
 
     /**
      * Constructor
