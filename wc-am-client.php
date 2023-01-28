@@ -9,6 +9,7 @@
  *
  * @version       2.7.K2
  * @author        Todd Lahman LLC https://www.toddlahman.com/
+ * Modified by    Christian Lescuyer / Goélette
  * @copyright     Copyright (c) Todd Lahman LLC (support@toddlahman.com)
  * @package       WooCommerce API Manager plugin and theme library
  * @license       Copyright Todd Lahman LLC
