@@ -488,28 +488,6 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 				$this->wc_am_api_key_key
 			);
 
-			add_settings_field(
-				'activation_max',
-				esc_html__( 'Activations', 'eae' ),
-				array(
-					$this,
-					'wc_am_api_activations',
-				),
-				$this->wc_am_activation_tab_key,
-				$this->wc_am_api_key_key
-			);
-
-			add_settings_field(
-				'expiration',
-				esc_html__( 'Expiration', 'eae' ),
-				array(
-					$this,
-					'wc_am_api_expiration',
-				),
-				$this->wc_am_activation_tab_key,
-				$this->wc_am_api_key_key
-			);
-
 			// Activation settings
 			register_setting(
 				$this->wc_am_deactivate_checkbox_key,
@@ -554,55 +532,6 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 			}
 
 			echo esc_attr( $license_status_check );
-		}
-
-		public function wc_am_api_activations() {
-			if ( is_array( $this->license_data ) ) {
-?>
-
-		<style>
-			table.wprank-activations { width: min-content; }
-			table.wprank-activations th { padding-bottom: 10px; padding-top: 0; text-align: center; }
-			table.wprank-activations td { padding-bottom: 10px; padding-top: 0; text-align: center; }
-		</style>
-		<table class="wprank-activations">
-			<thead>
-				<th><?php esc_html_e( 'Purchased', 'seomag' ); ?></th>
-				<th><?php esc_html_e( 'Used', 'seomag' ); ?></th>
-				<th><?php esc_html_e( 'Available', 'seomag' ); ?></th>
-			</thead>
-			<tbody>
-				<td><?php echo intval( $this->license_data['total_activations_purchased'] ); ?></td>
-				<td><?php echo intval( $this->license_data['total_activations'] ); ?></td>
-				<td><?php echo intval( $this->license_data['activations_remaining'] ); ?></td>
-			</tbody>
-		</table>
-
-<?php
-
-			} else {
-				echo '<span class="wprank-activations">';
-				esc_html_e( 'Data not available', 'seomag' );
-				echo '</span>';
-			}
-		}
-
-		/**
-		 * Displays the licence expiration info
-		 *
-		 * This is a callback
-		 */
-		public function wc_am_api_expiration() {
-			if ( is_array( $this->license_data ) ) {
-				$date = $this->license_data['api_key_expirations']['non_wc_subs_resources'][0]['friendly_api_key_expiration_date'];
-				echo '<span class="wprank-expiration">';
-				echo esc_html( $date );
-				echo '</span>';
-			} else {
-				echo '<span class="wprank-expiration">';
-				esc_html_e( 'Data not available', 'seomag' );
-				echo '</span>';
-			}
 		}
 
 		/**
