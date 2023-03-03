@@ -87,6 +87,10 @@ class AdminMainMenu {
      */
     public static function display_main_page() {
 
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return;
+        }
+
         // Retrieve main page with its embedded content from WP Rank website
         $response = wp_remote_get( WPRANK_API_URL . 'wp-json/wp/v2/pages?slug=a-propos-admin&_embed', array(
             'timeout' => 20,
