@@ -182,6 +182,16 @@ class AdminSubMenu {
     }
 
     /**
+     * Affiche le contenu de l’onglet Documentation
+     */
+    private function display_tab_documentation()
+    {
+        $href = 'https://www.wprank.net/guides/doc-extension-easy-alt-edit-pour-wordpress/';
+
+        require AdminMainMenu::$views_dir . 'admin-tab-documentation.inc';
+    }
+
+    /**
      * Affiche le contenu de l’onglet activation
      *
      * Pour le test : 6214b05ac2c6c0ff4712dde8e00626b815e309d0
@@ -225,9 +235,10 @@ class AdminSubMenu {
      * Define tabs
      */
     private function setup_tabs() {
-        self::$tabs['settings']     = [ 'name' => _x( 'Settings', 'Admin — tab name', 'eae'),             'callback' => 'display_tab_settings' ];
-        self::$tabs['activation']   = [ 'name' => _x( 'API Key Activation', 'Admin — tab name', 'eae'),   'callback' => 'display_tab_activation' ];
-        self::$tabs['deactivation'] = [ 'name' => _x( 'API Key Deactivation', 'Admin — tab name', 'eae'), 'callback' => 'display_tab_deactivation' ];
+        self::$tabs['settings']      = [ 'name' => _x( 'Settings', 'Admin — tab name', 'eae'),             'callback' => 'display_tab_settings' ];
+        self::$tabs['documentation'] = [ 'name' => _x( 'Documentation', 'Admin — tab name', 'eae'),        'callback' => 'display_tab_documentation' ];
+        self::$tabs['activation']    = [ 'name' => _x( 'API Key Activation', 'Admin — tab name', 'eae'),   'callback' => 'display_tab_activation' ];
+        self::$tabs['deactivation']  = [ 'name' => _x( 'API Key Deactivation', 'Admin — tab name', 'eae'), 'callback' => 'display_tab_deactivation' ];
 
         self::$default_tab = array_keys( self::$tabs )[0];
     }
