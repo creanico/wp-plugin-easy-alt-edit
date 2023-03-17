@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Easy ALT Edit\n"
-"POT-Creation-Date: 2023-01-20 15:59+0100\n"
+"POT-Creation-Date: 2023-03-14 18:05+0100\n"
 "PO-Revision-Date: 2021-02-22 14:37+0100\n"
 "Last-Translator: Jorhel Bourdier <jorhel.bdr@gmail.com>\n"
 "Language-Team: Jorhel Bourdier <jorhel.bdr@gmail.com>\n"
@@ -42,45 +42,50 @@ msgctxt "Admin — Submenu name"
 msgid "About"
 msgstr ""
 
-#: admin/AdminSubMenu.php:64
-msgctxt "Admin — tab name"
-msgid "Settings"
-msgstr ""
-
-#: admin/AdminSubMenu.php:65
-msgctxt "Admin — tab name"
-msgid "API Key Activation"
-msgstr ""
-
-#: admin/AdminSubMenu.php:66
-msgctxt "Admin — tab name"
-msgid "API Key Deactivation"
-msgstr ""
-
-#: admin/AdminSubMenu.php:96
+#: admin/AdminSubMenu.php:92
 msgctxt "Admin — Page title"
 msgid "Easy ALT Edit"
 msgstr ""
 
-#: admin/AdminSubMenu.php:97
+#: admin/AdminSubMenu.php:93
 msgctxt "Admin — Menu name"
 msgid "Easy ALT Edit"
 msgstr ""
 
-#: admin/AdminSubMenu.php:173
-msgid "force the use of alternative text from an image"
+#: admin/AdminSubMenu.php:169
+msgid "Force the use of alternative text from an image"
 msgstr ""
 
-#: admin/AdminSubMenu.php:178
+#: admin/AdminSubMenu.php:174
 msgid ""
 "If this option is checked, the alternative text entered from the \"Media\" "
 "tab will take priority over the alternative text entered from an article, a "
 "page ..."
 msgstr ""
 
-#: admin/AdminSubMenu.php:205 admin/AdminSubMenu.php:224 wc-am-client.php:407
-#: wc-am-client.php:411
+#: admin/AdminSubMenu.php:211 admin/AdminSubMenu.php:230 wc-am-client.php:405
+#: wc-am-client.php:409
 msgid "Save Changes"
+msgstr ""
+
+#: admin/AdminSubMenu.php:238
+msgctxt "Admin — tab name"
+msgid "Settings"
+msgstr ""
+
+#: admin/AdminSubMenu.php:239
+msgctxt "Admin — tab name"
+msgid "Documentation"
+msgstr ""
+
+#: admin/AdminSubMenu.php:240
+msgctxt "Admin — tab name"
+msgid "API Key Activation"
+msgstr ""
+
+#: admin/AdminSubMenu.php:241
+msgctxt "Admin — tab name"
+msgid "API Key Deactivation"
 msgstr ""
 
 #: admin/class-eae-plugin.php:51
@@ -109,112 +114,92 @@ msgstr ""
 msgid "Extend your license with 40%% off before the %s!"
 msgstr ""
 
-#: wc-am-client.php:131 wc-am-client.php:132
+#: wc-am-client.php:132 wc-am-client.php:133
 msgid " Activation"
 msgstr ""
 
-#: wc-am-client.php:133 wc-am-client.php:434
+#: wc-am-client.php:134 wc-am-client.php:432
 msgid "API Key Activation"
 msgstr ""
 
-#: wc-am-client.php:134
+#: wc-am-client.php:135
 msgid "API Key Deactivation"
 msgstr ""
 
-#: wc-am-client.php:229
+#: wc-am-client.php:230
 msgid ""
 "Attempt to migrate data failed. Deactivate then reactive this plugin or "
 "theme, then enter your API Key on the settings screen to receive software "
 "updates. Contact support if assistance is required."
 msgstr ""
 
-#: wc-am-client.php:357
+#: wc-am-client.php:355
 #, php-format
 msgid ""
 "The <strong>%1$s</strong> API Key has not been activated, so the %2$s is "
 "inactive! %3$sClick here%4$s to activate <strong>%5$s</strong>."
 msgstr ""
 
-#: wc-am-client.php:375
+#: wc-am-client.php:373
 #, php-format
 msgid ""
 "<b>Warning!</b> You're blocking external requests which means you won't be "
 "able to get %1$s updates. Please add %2$s to %3$s."
 msgstr ""
 
-#: wc-am-client.php:443
+#: wc-am-client.php:441
 msgid "API Key"
 msgstr ""
 
-#: wc-am-client.php:458
+#: wc-am-client.php:456
 msgid "Product ID"
 msgstr ""
 
-#: wc-am-client.php:470
+#: wc-am-client.php:468
 msgid "API Key Status"
 msgstr ""
 
-#: wc-am-client.php:484
+#: wc-am-client.php:482
 msgid "License owner"
 msgstr ""
 
-#: wc-am-client.php:495
-msgid "Activations"
-msgstr ""
-
-#: wc-am-client.php:506
-msgid "Expiration"
-msgstr ""
-
-#: wc-am-client.php:526
+#: wc-am-client.php:502
 msgid "API Deactivation"
 msgstr ""
 
-#: wc-am-client.php:535
+#: wc-am-client.php:511
 msgid "Deactivate API Key"
 msgstr ""
 
-#: wc-am-client.php:551
+#: wc-am-client.php:527
 msgid "Activated"
 msgstr ""
 
-#: wc-am-client.php:555
+#: wc-am-client.php:531
 msgid "Deactivated"
 msgstr ""
 
-#: wc-am-client.php:572
-msgid "Purchased"
-msgstr ""
-
-#: wc-am-client.php:573
-msgid "Used"
-msgstr ""
-
-#: wc-am-client.php:574
-msgid "Available"
-msgstr ""
-
-#: wc-am-client.php:587 wc-am-client.php:605 wc-am-client.php:636
+#: wc-am-client.php:563
 msgid "Data not available"
 msgstr ""
 
-#: wc-am-client.php:762
+#: wc-am-client.php:689
 #, php-format
 msgid "%s activated. "
 msgstr ""
 
-#: wc-am-client.php:768
+#: wc-am-client.php:695
 msgid ""
 "Connection failed to the License Key API server. Try again later. There may "
 "be a problem on your server preventing outgoing requests, or the store is "
 "blocking your request to activate the plugin/theme."
 msgstr ""
 
-#: wc-am-client.php:798
+#: wc-am-client.php:725
 msgid "API Key deactivated. "
 msgstr ""
 
-#: wc-am-client.php:834
+#: wc-am-client.php:761
 msgid ""
 "The API Key could not be deactivated. Use the API Key Deactivation tab to "
 "manually deactivate the API Key before activating a new API Key. If all "
@@ -225,7 +210,7 @@ msgid ""
 "this site was still active before the error message was displayed."
 msgstr ""
 
-#: wc-am-client.php:846
+#: wc-am-client.php:773
 msgid "Deactivates an API Key so it can be used on another blog."
 msgstr ""
 

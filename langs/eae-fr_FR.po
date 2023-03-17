@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Easy ALT Edit\n"
-"POT-Creation-Date: 2023-03-03 12:24+0100\n"
-"PO-Revision-Date: 2023-03-03 12:25+0100\n"
+"POT-Creation-Date: 2023-03-14 18:05+0100\n"
+"PO-Revision-Date: 2023-03-14 18:05+0100\n"
 "Last-Translator: Jorhel Bourdier <jorhel.bdr@gmail.com>\n"
 "Language-Team: Jorhel Bourdier <jorhel.bdr@gmail.com>\n"
 "Language: fr_FR\n"
@@ -66,22 +66,27 @@ msgstr ""
 "« Médias » aura la priorité sur le texte alternatif saisi à partir d’un "
 "article, d’une page..."
 
-#: admin/AdminSubMenu.php:201 admin/AdminSubMenu.php:220 wc-am-client.php:405
+#: admin/AdminSubMenu.php:211 admin/AdminSubMenu.php:230 wc-am-client.php:405
 #: wc-am-client.php:409
 msgid "Save Changes"
 msgstr "Sauvegarder les changements"
 
-#: admin/AdminSubMenu.php:228
+#: admin/AdminSubMenu.php:238
 msgctxt "Admin — tab name"
 msgid "Settings"
 msgstr "Réglages"
 
-#: admin/AdminSubMenu.php:229
+#: admin/AdminSubMenu.php:239
+msgctxt "Admin — tab name"
+msgid "Documentation"
+msgstr "Documentation"
+
+#: admin/AdminSubMenu.php:240
 msgctxt "Admin — tab name"
 msgid "API Key Activation"
 msgstr "Activation de la clé API"
 
-#: admin/AdminSubMenu.php:230
+#: admin/AdminSubMenu.php:241
 msgctxt "Admin — tab name"
 msgid "API Key Deactivation"
 msgstr "Désactivation de la clé API"
