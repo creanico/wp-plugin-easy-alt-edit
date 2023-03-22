@@ -562,7 +562,7 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 
 			// Something went wrong
 			echo '<span class="wprank-licensee">';
-			esc_html_e( 'Data not available', 'seomag' );
+			esc_html_e( 'Data not available', 'eae' );
 			echo '</span>';
 		}
 

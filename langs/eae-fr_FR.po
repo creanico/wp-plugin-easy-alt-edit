@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Easy ALT Edit\n"
-"POT-Creation-Date: 2023-03-14 18:05+0100\n"
-"PO-Revision-Date: 2023-03-14 18:05+0100\n"
+"POT-Creation-Date: 2023-03-22 12:03+0100\n"
+"PO-Revision-Date: 2023-03-22 12:03+0100\n"
 "Last-Translator: Jorhel Bourdier <jorhel.bdr@gmail.com>\n"
 "Language-Team: Jorhel Bourdier <jorhel.bdr@gmail.com>\n"
 "Language: fr_FR\n"
@@ -18,9 +18,18 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
 "esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
 "_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-Mapping: *.inc=gettext:PHP\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
+
+#: views/admin-tab-documentation.inc:4
+msgid "Documentation"
+msgstr "Documentation"
+
+#: views/admin-tab-documentation.inc:7
+msgid "The full documentation is available online :"
+msgstr "La documentation complète est disponible en ligne :"
 
 #: admin/AdminMainMenu.php:65
 msgctxt "Admin — Page title"
@@ -66,8 +75,8 @@ msgstr ""
 "« Médias » aura la priorité sur le texte alternatif saisi à partir d’un "
 "article, d’une page..."
 
-#: admin/AdminSubMenu.php:211 admin/AdminSubMenu.php:230 wc-am-client.php:405
-#: wc-am-client.php:409
+#: admin/AdminSubMenu.php:211 admin/AdminSubMenu.php:230 wc-am-client.php:407
+#: wc-am-client.php:411
 msgid "Save Changes"
 msgstr "Sauvegarder les changements"
 
@@ -122,7 +131,7 @@ msgstr "Prolongez votre licence avec une réduction de 40%% avant le %s !"
 msgid " Activation"
 msgstr " Activation"
 
-#: wc-am-client.php:134 wc-am-client.php:432
+#: wc-am-client.php:134 wc-am-client.php:434
 msgid "API Key Activation"
 msgstr "Activation de la clé API"
 
@@ -141,7 +150,7 @@ msgstr ""
 "recevoir les mises à jour logicielles. Contactez le support si une "
 "assistance est nécessaire."
 
-#: wc-am-client.php:355
+#: wc-am-client.php:357
 #, php-format
 msgid ""
 "The <strong>%1$s</strong> API Key has not been activated, so the %2$s is "
@@ -150,7 +159,7 @@ msgstr ""
 "La clé API <strong>%s</strong> n'a pas été activée, donc %s est inactif. "
 "%sCliquez ici%s pour activer <strong>%s</strong>."
 
-#: wc-am-client.php:373
+#: wc-am-client.php:375
 #, php-format
 msgid ""
 "<b>Warning!</b> You're blocking external requests which means you won't be "
@@ -159,48 +168,48 @@ msgstr ""
 "<b>Attention !</b> Vous bloquez les requêtes externes, ce qui signifie que "
 "vous ne pourrez pas obtenir les mises à jour de %s. Veuillez ajouter %s à %s."
 
-#: wc-am-client.php:441
+#: wc-am-client.php:443
 msgid "API Key"
 msgstr "Clé API"
 
-#: wc-am-client.php:456
+#: wc-am-client.php:458
 msgid "Product ID"
 msgstr "ID produit"
 
-#: wc-am-client.php:468
+#: wc-am-client.php:470
 msgid "API Key Status"
 msgstr "Statut de la clé API"
 
-#: wc-am-client.php:482
+#: wc-am-client.php:484
 msgid "License owner"
 msgstr "Titulaire de la licence"
 
-#: wc-am-client.php:502
+#: wc-am-client.php:504
 msgid "API Deactivation"
 msgstr "Désactivation de l'API"
 
-#: wc-am-client.php:511
+#: wc-am-client.php:513
 msgid "Deactivate API Key"
 msgstr "Désactiver de la clé API"
 
-#: wc-am-client.php:527
+#: wc-am-client.php:529
 msgid "Activated"
 msgstr "Activée"
 
-#: wc-am-client.php:531
+#: wc-am-client.php:533
 msgid "Deactivated"
 msgstr "Désactivée"
 
-#: wc-am-client.php:563
+#: wc-am-client.php:565
 msgid "Data not available"
 msgstr "Information non disponible"
 
-#: wc-am-client.php:689
+#: wc-am-client.php:691
 #, php-format
 msgid "%s activated. "
 msgstr "%s activée. "
 
-#: wc-am-client.php:695
+#: wc-am-client.php:697
 msgid ""
 "Connection failed to the License Key API server. Try again later. There may "
 "be a problem on your server preventing outgoing requests, or the store is "
@@ -210,11 +219,11 @@ msgstr ""
 "Il peut y avoir un problème sur votre serveur empêchant les demandes "
 "sortantes, ou le magasin bloque votre demande d'activation du plugin / thème."
 
-#: wc-am-client.php:725
+#: wc-am-client.php:727
 msgid "API Key deactivated. "
 msgstr "Clé API désactivée. "
 
-#: wc-am-client.php:761
+#: wc-am-client.php:763
 msgid ""
 "The API Key could not be deactivated. Use the API Key Deactivation tab to "
 "manually deactivate the API Key before activating a new API Key. If all else "
@@ -233,7 +242,7 @@ msgstr ""
 "de bord Mon compte pour voir si la clé API de ce site était toujours active "
 "avant l'affichage du message d'erreur."
 
-#: wc-am-client.php:773
+#: wc-am-client.php:775
 msgid "Deactivates an API Key so it can be used on another blog."
 msgstr ""
 "Désactive une clé API afin qu'elle puisse être utilisée sur un autre blog."
