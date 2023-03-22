@@ -339,6 +339,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 			 * Filter wc_am_client_inactive_notice_override
 			 * If set to false inactive_notice() method will be disabled.
 			 */
+			$menu_url        = WpRank\EasyAlt\AdminSubMenu::$admin_page;
+			$activation_link = $menu_url . '&amp;tab=activation';
 			?>
 			<?php if ( apply_filters( 'wc_am_client_inactive_notice_override', true ) ) { ?>
 				<?php
@@ -352,7 +354,7 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 				}
 				?>
 				<div class="notice notice-error">
-					<p><?php printf( __( 'The <strong>%1$s</strong> API Key has not been activated, so the %2$s is inactive! %3$sClick here%4$s to activate <strong>%5$s</strong>.', 'eae' ), esc_attr( $this->software_title ), esc_attr( $this->plugin_or_theme ), '<a href="' . esc_url( admin_url( 'options-general.php?page=' . $this->wc_am_activation_tab_key ) ) . '">', '</a>', esc_attr( $this->software_title ) ); ?></p>
+					<p><?php printf( __( 'The <strong>%1$s</strong> API Key has not been activated, so the %2$s is inactive! %3$sClick here%4$s to activate <strong>%5$s</strong>.', 'eae' ), esc_attr( $this->software_title ), esc_attr( $this->plugin_or_theme ), '<a href="' . esc_url( $activation_link ) . '">', '</a>', esc_attr( $this->software_title ) ); ?></p>
 				</div>
 				<?php
 			}
