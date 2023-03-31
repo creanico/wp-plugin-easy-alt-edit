@@ -67,6 +67,7 @@ function abw_expiration_prochaine_eae() {
 		set_transient( 'access_expires_eae', $access_expires, 3600*24 ); // On stock en transient pour 24 heures
 	endif;
 	if( !empty($access_expires) ) $strtotime_access_expires = strtotime($access_expires);
+
 	if( !empty($access_expires) && checkdate( date('m', $strtotime_access_expires), date('d', $strtotime_access_expires), date('Y', $strtotime_access_expires) ) && $strtotime_access_expires>time() && $strtotime_access_expires<(time()+15*24*3600) ): // Définir ici le nombre de jour pour déclencher la fenêtre d'information
 		$class = 'notice notice-warning is-dismissible';
 		$titre = __( "Your Easy ALT Edit license expires in", 'eae' )." ";
@@ -77,8 +78,16 @@ function abw_expiration_prochaine_eae() {
 		printf( '<div data-dismissible="%1$s" class="%2$s"><p><strong style="font-size:16px">%3$s<span id="abw_countdown_monetico"></span></strong></p><p>%4$s</p><p><a class="button button-primary" href="https://www.wprank.net/boutique/renouveler-vos-licences/?utm_source=site_client&utm_medium=notice" target="_blank">%5$s</a></p>%6$s</div>', esc_attr( $dismissible ), esc_attr( $class ), esc_html( $titre ), esc_html( $message ), esc_html( $bouton ), $script );
 	endif;
 }
-if(!function_exists('abw_recuperation_date_expiration')):
-	function abw_recuperation_date_expiration( $tab ) {
+
+/*
+ * Cette fonction est définie optionnellement dans tous les plugins WP Rank
+ */
+if ( ! function_exists( 'abw_recuperation_date_expiration' ) ) {
+	function abw_recuperation_date_expiration( $tab )
+	{
+		if ( ! class_exists( 'IntlDateFormatter' ) ) {
+			return '';
+		}
 
 		// Si un client à acheté plusieurs licences d'une même variation sur des dommandes différentes, on ne peut pas déterminer la bonne date à utiliser si il utilise sa clé de licence globale.
 		// Si il utilise sa clé de licence produit/commande, pas de problème, une seule date va remonter
@@ -89,7 +98,7 @@ if(!function_exists('abw_recuperation_date_expiration')):
 				$time = $tab['data']['api_key_expirations']['non_wc_subs_resources'][0]['friendly_api_key_expiration_date']; // ex. 24 octobre 2023 13h11
 
 				// Conversion de la date textuelle française en date standardisée
-				$parsedTime = \IntlDateFormatter::create( 'fr', IntlDateFormatter::FULL, IntlDateFormatter::FULL, null, null, "d MMMM y kk'h'mm" )->parse( $time );
+				$parsedTime = \IntlDateFormatter::create( 'fr', \IntlDateFormatter::FULL, \IntlDateFormatter::FULL, null, null, "d MMMM y kk'h'mm" )->parse( $time );
 				if ( $parsedTime ) {
 					$dateTime = \DateTime::createFromFormat( 'U', $parsedTime );
 					$formattedDate = $dateTime->format( 'Y-m-d H:i' );
@@ -101,4 +110,4 @@ if(!function_exists('abw_recuperation_date_expiration')):
 
 		return '';
 	}
-endif;
+}
