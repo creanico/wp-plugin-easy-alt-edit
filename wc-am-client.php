@@ -1000,13 +1000,18 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 				return $transient;
 			}
 
+			if ( is_array( $this->data ) and array_key_exists( $this->wc_am_api_key_key, $this->data ) ) {
+				$api_key = $this->data[ $this->wc_am_api_key_key ];
+			} else {
+				$api_key = '';
+			}
 			$args = array(
 				'wc_am_action' => 'update',
 				'slug'         => $this->slug,
 				'plugin_name'  => $this->plugin_name,
 				'version'      => $this->wc_am_software_version,
 				'product_id'   => $this->product_id,
-				'api_key'      => $this->data[ $this->wc_am_api_key_key ],
+				'api_key'      => $api_key,
 				'instance'     => $this->wc_am_instance_id,
 			);
 
@@ -1075,12 +1080,17 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 				return $result;
 			}
 
+			if ( is_array( $this->data ) and array_key_exists( $this->wc_am_api_key_key, $this->data ) ) {
+				$api_key = $this->data[ $this->wc_am_api_key_key ];
+			} else {
+				$api_key = '';
+			}
 			$args = array(
 				'wc_am_action' => 'plugininformation',
 				'plugin_name'  => $this->plugin_name,
 				'version'      => $this->wc_am_software_version,
 				'product_id'   => $this->product_id,
-				'api_key'      => $this->data[ $this->wc_am_api_key_key ],
+				'api_key'      => $api_key,
 				'instance'     => $this->wc_am_instance_id,
 				'object'       => $this->wc_am_domain,
 			);

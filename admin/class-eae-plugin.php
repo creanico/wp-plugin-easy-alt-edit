@@ -36,8 +36,15 @@ if ( ! class_exists( 'EAE_Plugin' ) ) {
 		 *
 		 * @since 1.0.0
 		 */
-		public function force_alts() {
-			return (bool) get_option( 'eae_options' )['force_alts'];
+		public function force_alts()
+		{
+			$options = get_option( 'eae_options' );
+
+			if ( is_array( $options ) and array_key_exists( 'force_alts', $options ) ) {
+				return (bool)$option['force_alts'];
+			}
+
+			return false;
 		}
 
 		/**
