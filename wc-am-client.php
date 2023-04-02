@@ -314,15 +314,20 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		/**
 		 * Deactivates the license on the API server
 		 */
-		public function license_key_deactivation() {
+		public function license_key_deactivation()
+		{
 			$activation_status = get_option( $this->wc_am_activated_key );
-			$api_key           = $this->data[ $this->wc_am_api_key_key ];
+			if ( isset( $this->data[ $this->wc_am_api_key_key ] ) ) {
+				$key = $this->data[ $this->wc_am_api_key_key ];
+			} else {
+				$key = '';
+			}
 
 			$args = array(
-				'api_key' => $api_key,
+				'api_key' => $key,
 			);
 
-			if ( $activation_status == 'Activated' && $api_key != '' ) {
+			if ( $activation_status == 'Activated' && $key != '' ) {
 				$this->deactivate( $args ); // reset API Key activation
 			}
 		}
@@ -541,9 +546,13 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		 *
 		 * This is a callback
 		 */
-		public function wc_am_api_licensee() {
-			$key = '5fde630da12164875f71291b1c4adb46d9db249f';
-			$key = $this->data[ $this->wc_am_api_key_key ];
+		public function wc_am_api_licensee()
+		{
+			if ( isset( $this->data[ $this->wc_am_api_key_key ] ) ) {
+				$key = $this->data[ $this->wc_am_api_key_key ];
+			} else {
+				$key = '';
+			}
 
 			$rest_url = $this->api_url . 'wp-json/wp-rank/v1/license/info/' . $key;
 			$url      = sanitize_url( $rest_url );

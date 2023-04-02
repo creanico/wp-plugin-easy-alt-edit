@@ -11,7 +11,8 @@ defined( 'ABSPATH' ) || die();
 /**
  * Admin
  */
-class AdminSubMenu {
+class AdminSubMenu
+{
 
     /**
      * The slug for the main menu
@@ -66,7 +67,8 @@ class AdminSubMenu {
     /**
      * Attach hook for later processing
      */
-    public function run() {
+    public function run()
+    {
         add_action( 'admin_menu', array( $this, 'init' ) );
     }
 
@@ -74,8 +76,8 @@ class AdminSubMenu {
     /**
      * Initialize the admin menu
      */
-    public function init() {
-
+    public function init()
+    {
         // Security check — access restricted to admin users
         if ( ! current_user_can( 'manage_options' ) ) {
             return;
@@ -111,8 +113,8 @@ class AdminSubMenu {
      *
      * @access public
      */
-    public function setup_settings() {
-
+    public function setup_settings()
+    {
         register_setting(
             'eae_options',
             'eae_options',
@@ -126,8 +128,8 @@ class AdminSubMenu {
     /**
      * Sanitization callback.
      */
-    public function sanitize( $options ) {
-
+    public function sanitize( $options )
+    {
         $options['force_alts'] = ! empty( $options['force_alts'] );
 
         return $options;
@@ -136,8 +138,8 @@ class AdminSubMenu {
     /**
      * Settings page content
      */
-    public function settings_page_content() {
-
+    public function settings_page_content()
+    {
         $active = $_GET['tab'] ?? self::$default_tab;
 ?>
 
@@ -159,6 +161,12 @@ class AdminSubMenu {
      */
     private function display_tab_settings()
     {
+        $options = get_option( 'eae_options' );
+        if ( isset( $options['force_alts'] ) ) {
+            $checked = (bool)get_option( 'eae_options' )['force_alts'];
+        } else {
+            $checked = false;
+        }
 ?>
         <div class="wrap">
             <form method="post" action="options.php">
@@ -169,8 +177,7 @@ class AdminSubMenu {
                             <?php esc_html_e( 'Force the use of alternative text from an image', 'eae' ); ?>
                         </th>
                         <td>
-                            <?php $value = (bool) get_option( 'eae_options' )['force_alts']; ?>
-                            <input type="checkbox" name="eae_options[force_alts]" value="1" <?php checked( $value, 1 ); ?>>
+                            <input type="checkbox" name="eae_options[force_alts]" value="1" <?php checked( $checked, 1 ); ?>>
                             <?php esc_html_e( 'If this option is checked, the alternative text entered from the "Media" tab will take priority over the alternative text entered from an article, a page ...', 'eae' ); ?>
                         </td>
                     </tr>
@@ -234,7 +241,8 @@ class AdminSubMenu {
     /**
      * Define tabs
      */
-    private function setup_tabs() {
+    private function setup_tabs()
+    {
         self::$tabs['settings']      = [ 'name' => _x( 'Settings', 'Admin — tab name', 'eae'),             'callback' => 'display_tab_settings' ];
         self::$tabs['documentation'] = [ 'name' => _x( 'Documentation', 'Admin — tab name', 'eae'),        'callback' => 'display_tab_documentation' ];
         self::$tabs['activation']    = [ 'name' => _x( 'API Key Activation', 'Admin — tab name', 'eae'),   'callback' => 'display_tab_activation' ];
@@ -246,7 +254,7 @@ class AdminSubMenu {
     /**
      * Affiche la navigation par onglets
      */
-    private function display_tab_nav( string $active ): void
+    private function display_tab_nav( string $active )
     {
         $url    = self::$admin_page;
         $active = $_GET['tab'] ?? self::$default_tab;
@@ -263,7 +271,8 @@ class AdminSubMenu {
     /**
      * Remove the Activation submenu from Settings
      */
-    private function remove_activation_menu() {
+    private function remove_activation_menu()
+    {
         remove_submenu_page( 'options-general.php', 'wc_am_client_easy_alt_edit_dashboard' );
     }
 }
