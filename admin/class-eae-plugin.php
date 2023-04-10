@@ -41,7 +41,7 @@ if ( ! class_exists( 'EAE_Plugin' ) ) {
 			$options = get_option( 'eae_options' );
 
 			if ( is_array( $options ) and array_key_exists( 'force_alts', $options ) ) {
-				return (bool)$option['force_alts'];
+				return (bool)$options['force_alts'];
 			}
 
 			return false;
