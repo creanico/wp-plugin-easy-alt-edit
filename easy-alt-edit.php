@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Easy ALT Edit
  * Description: This extension allows you to easily and quickly manage alternate titles of your images directly from the media list.
- * Version: 1.0.2
+ * Version: 1.1.0
  * Requires at least: 5.6
  * Tested up to: 6.2
  * Requires PHP: 7.0
@@ -15,7 +15,7 @@
 
 defined( 'ABSPATH' ) || die( 'Cheating?' );
 
-define( 'EAE_VERSION', '1.0.2' );
+define( 'EAE_VERSION', '1.1.0' );
 define( 'EAE_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 if ( ! defined( 'WPRANK_API_URL' ) ) {
 	define( 'WPRANK_API_URL', 'https://www.wprank.net/' );

@@ -56,7 +56,6 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		public $wc_am_menu_tab_deactivation_title = '';
 		public $wc_am_plugin_name                 = '';
 		public $wc_am_product_id                  = '';
-		public $wc_am_renew_license_url           = '';
 		public $wc_am_settings_menu_title         = '';
 		public $wc_am_settings_title              = '';
 		public $wc_am_software_version            = '';
@@ -67,7 +66,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		// License
 		private $license_data;
 
-		public function __construct( $file, $product_id, $software_version, $plugin_or_theme, $api_url, $software_title = '' ) {
+		public function __construct( $file, $product_id, $software_version, $plugin_or_theme, $api_url, $software_title = '' )
+		{
 			$this->no_product_id   = empty( $product_id );
 			$this->plugin_or_theme = esc_attr( strtolower( $plugin_or_theme ) );
 
@@ -139,7 +139,6 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 				 */
 				$this->data                    = get_option( $this->data_key );
 				$this->wc_am_plugin_name       = $this->plugin_or_theme == 'plugin' ? untrailingslashit( plugin_basename( $this->file ) ) : get_stylesheet(); // same as plugin slug. if a theme use a theme name like 'twentyeleven'
-				$this->wc_am_renew_license_url = $this->api_url . 'my-account'; // URL to renew an API Key. Trailing slash in the upgrade_url is required.
 				$this->wc_am_instance_id       = get_option( $this->wc_am_instance_key ); // Instance ID (unique to each blog activation)
 				/**
 				 * Some web hosts have security policies that block the : (colon) and // (slashes) in http://,
@@ -178,6 +177,9 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 			if ( $this->plugin_or_theme == 'theme' ) {
 				add_action( 'switch_theme', array( $this, 'uninstall' ) );
 			}
+
+			// Delete obsolete license data
+			delete_transient( self::$transient_name );
 		}
 
 		/**
@@ -188,7 +190,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		 * @param int    $product_id
 		 * @param string $software_title
 		 */
-		public function migrate_pre_2_0_data( $product_id, $software_title ) {
+		public function migrate_pre_2_0_data( $product_id, $software_title )
+		{
 			$upraded_postfix = strtolower( str_ireplace( array( ' ', '_', '&', '?', '-' ), '_', $product_id ) );
 			$upraded         = get_option( 'wc_client_20_ugrade_attempt_' . $upraded_postfix );
 
@@ -224,7 +227,9 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		 *
 		 * @since 2.0
 		 */
-		public function migrate_error_notice() { ?>
+		public function migrate_error_notice()
+		{
+?>
 			<div class="notice notice-error">
 				<p>
 					<?php esc_html_e( 'Attempt to migrate data failed. Deactivate then reactive this plugin or theme, then enter your API Key on the settings screen to receive software updates. Contact support if assistance is required.', 'eae' ); ?>
@@ -237,7 +242,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		 * license_key_deactivation
 		 * Register submenu specific to this product.
 		 */
-		public function register_menu() {
+		public function register_menu()
+		{
 			add_options_page(
 				esc_html__( $this->wc_am_settings_menu_title, 'eae' ),
 				esc_html__( $this->wc_am_settings_menu_title, 'eae' ),
@@ -253,7 +259,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		/**
 		 * Generate the default data.
 		 */
-		public function activation() {
+		public function activation()
+		{
 			$instance_exists = get_option( $this->wc_am_instance_key );
 
 			if ( get_option( $this->data_key ) === false || $instance_exists === false ) {
@@ -269,7 +276,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		/**
 		 * Deletes all data if plugin deactivated
 		 */
-		public function uninstall() {
+		public function uninstall()
+		{
 			/**
 			 * @since 2.5.1
 			 *
@@ -336,8 +344,6 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		 * Displays an inactive notice when the software is inactive.
 		 */
 		public function inactive_notice() {
-?>
-			<?php
 			/**
 			 * @since 2.5.1
 			 *
@@ -346,7 +352,7 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 			 */
 			$menu_url        = WpRank\EasyAlt\AdminSubMenu::$admin_page;
 			$activation_link = $menu_url . '&amp;tab=activation';
-			?>
+?>
 			<?php if ( apply_filters( 'wc_am_client_inactive_notice_override', true ) ) { ?>
 				<?php
 				if ( ! current_user_can( 'manage_options' ) ) {
@@ -368,7 +374,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		/**
 		 * Check for external blocking contstant.
 		 */
-		public function check_external_blocking() {
+		public function check_external_blocking()
+		{
 			// show notice if external requests are blocked through the WP_HTTP_BLOCK_EXTERNAL constant
 			if ( defined( 'WP_HTTP_BLOCK_EXTERNAL' ) && WP_HTTP_BLOCK_EXTERNAL === true ) {
 				// check if our API endpoint is in the allowed hosts
@@ -385,7 +392,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		}
 
 		// Draw option page
-		public function config_page() {
+		public function config_page()
+		{
 			$settings_tabs = array(
 				$this->wc_am_activation_tab_key   => esc_html__( $this->wc_am_menu_tab_activation_title, 'eae' ),
 				$this->wc_am_deactivation_tab_key => esc_html__( $this->wc_am_menu_tab_deactivation_title, 'eae' ),
@@ -423,7 +431,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		}
 
 		// Register settings
-		public function load_settings() {
+		public function load_settings()
+		{
 			register_setting(
 				$this->data_key,
 				$this->data_key,
@@ -495,6 +504,39 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 				$this->wc_am_api_key_key
 			);
 
+			add_settings_field(
+				'activation_max',
+				esc_html__( 'Activations', 'eae' ),
+				array(
+					$this,
+					'wc_am_api_activations',
+				),
+				$this->wc_am_activation_tab_key,
+				$this->wc_am_api_key_key
+			);
+
+			add_settings_field(
+				'expiration',
+				esc_html__( 'Expiration', 'eae' ),
+				array(
+					$this,
+					'wc_am_api_expiration',
+				),
+				$this->wc_am_activation_tab_key,
+				$this->wc_am_api_key_key
+			);
+
+			add_settings_field(
+				'next_payment',
+				esc_html__( 'Next payment', 'eae' ),
+				array(
+					$this,
+					'wc_am_api_next_payment',
+				),
+				$this->wc_am_activation_tab_key,
+				$this->wc_am_api_key_key
+			);
+
 			// Activation settings
 			register_setting(
 				$this->wc_am_deactivate_checkbox_key,
@@ -529,7 +571,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		public function wc_am_api_key_text() { }
 
 		// Returns the API Key status from the WooCommerce API Manager on the server
-		public function wc_am_api_key_status() {
+		public function wc_am_api_key_status()
+		{
 			if ( $this->get_api_key_status( true ) ) {
 				$license_status_check = esc_html__( 'Activated', 'eae' );
 				update_option( $this->wc_am_activated_key, 'Activated' );
@@ -539,6 +582,96 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 			}
 
 			echo esc_attr( $license_status_check );
+		}
+
+		public function wc_am_api_activations()
+		{
+			if ( is_array( $this->license_data ) && isset( $this->license_data['total_activations_purchased'] ) ) {
+?>
+
+		<style>
+			table.wprank-activations { width: min-content; }
+			table.wprank-activations th { padding-bottom: 10px; padding-top: 0; text-align: center; }
+			table.wprank-activations td { padding-bottom: 10px; padding-top: 0; text-align: center; }
+		</style>
+		<table class="wprank-activations">
+			<thead>
+				<th><?php esc_html_e( 'Purchased', 'eae' ); ?></th>
+				<th><?php esc_html_e( 'Used', 'eae' ); ?></th>
+				<th><?php esc_html_e( 'Available', 'eae' ); ?></th>
+			</thead>
+			<tbody>
+				<td><?php echo intval( $this->license_data['total_activations_purchased'] ); ?></td>
+				<td><?php echo intval( $this->license_data['total_activations'] ); ?></td>
+				<td><?php echo intval( $this->license_data['activations_remaining'] ); ?></td>
+			</tbody>
+		</table>
+
+<?php
+
+			} else {
+				echo '<span class="wprank-activations">';
+				esc_html_e( 'Data not available', 'eae' );
+				echo '</span>';
+			}
+		}
+
+		/**
+		 * Displays the licence expiration info
+		 *
+		 * This is a callback
+		 */
+		public function wc_am_api_expiration()
+		{
+			if ( is_array( $this->license_data ) && isset( $this->license_data['api_key_expirations'] ) ) {
+				if ( array_key_exists( 'wc_subs_resources', $this->license_data['api_key_expirations'] ) ) {
+
+					// WooCommerce Subscription
+					$date = $this->license_data['api_key_expirations']['wc_subs_resources'][0]['friendly_api_key_expiration_date'];
+				} else {
+
+					// WooCommerce ordinary product
+					$date = $this->license_data['api_key_expirations']['non_wc_subs_resources'][0]['friendly_api_key_expiration_date'];
+				}
+				echo '<span class="wprank-expiration">';
+				if ( 'When Cancelled' == $date ) {
+					esc_html_e( 'When cancelled', 'eae' );
+				} else {
+					echo esc_html( $date );
+				}
+				echo '</span>';
+			} else {
+				echo '<span class="wprank-expiration">';
+				esc_html_e( 'Data not available', 'eae' );
+				echo '</span>';
+			}
+		}
+
+		/**
+		 * Displays the licence next payment date
+		 *
+		 * This is a callback
+		 */
+		public function wc_am_api_next_payment()
+		{
+			if ( is_array( $this->license_data ) && isset( $this->license_data['api_key_expirations'] ) ) {
+				if ( array_key_exists( 'wc_subs_resources', $this->license_data['api_key_expirations'] ) ) {
+
+					// WooCommerce Subscription
+					$next_payment = $this->license_data['api_key_expirations']['wc_subs_resources'][0]['next_payment'];
+				} else {
+
+					// WooCommerce ordinary product
+					$next_payment = $this->license_data['api_key_expirations']['non_wc_subs_resources'][0]['next_payment'];
+				}
+				echo '<span class="wprank-next-payment">';
+				echo esc_html( $next_payment );
+				echo '</span>';
+			} else {
+				echo '<span class="wprank-next-payment">';
+				esc_html_e( 'Data not available', 'eae' );
+				echo '</span>';
+			}
 		}
 
 		/**
@@ -582,7 +715,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		 *
 		 * @return array|mixed|object
 		 */
-		public function license_key_status() {
+		public function license_key_status()
+		{
 			$status   = $this->status();
 			$contents = json_decode( $status, true );
 			if ( isset( $contents['data'] ) ) {
@@ -602,8 +736,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		 *
 		 * @return bool
 		 */
-		public function get_api_key_status( $live = false ) {
-
+		public function get_api_key_status( $live = false )
+		{
 			/**
 			 * Real-time result.
 			 *
@@ -615,16 +749,13 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 				return ! empty( $license_status['data']['activated'] ) && $license_status['data']['activated'];
 			}
 
-			/**
-			 * If $live === false.
-			 *
-			 * Stored result when first activating software.
-			 */
+			// Stored result when first activating software.
 			return get_option( $this->wc_am_activated_key ) == 'Activated';
 		}
 
 		// Returns API Key text field
-		public function wc_am_api_key_field() {
+		public function wc_am_api_key_field()
+		{
 			if ( ! empty( $this->data[ $this->wc_am_api_key_key ] ) ) {
 				echo "<input id='api_key' name='" . esc_attr( $this->data_key ) . '[' . esc_attr( $this->wc_am_api_key_key ) . "]' size='36' type='text' value='" . esc_attr( $this->data[ $this->wc_am_api_key_key ] ) . "' />";
 			} else {
@@ -635,7 +766,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		/**
 		 * @since 2.3
 		 */
-		public function wc_am_product_id_field() {
+		public function wc_am_product_id_field()
+		{
 			$product_id = get_option( $this->wc_am_product_id );
 
 			if ( ! empty( $product_id ) ) {
@@ -658,7 +790,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		 *
 		 * @return mixed|string
 		 */
-		public function validate_options( $input ) {
+		public function validate_options( $input )
+		{
 			// Load existing options, validate, and update with changes from input before returning
 			$options                             = $this->data;
 			$options[ $this->wc_am_api_key_key ] = trim( $input[ $this->wc_am_api_key_key ] );
@@ -718,7 +851,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		}
 
 		// Deactivates the API Key to allow key to be used on another blog
-		public function wc_am_license_key_deactivation( $input ) {
+		public function wc_am_license_key_deactivation( $input )
+		{
 			$activation_status = get_option( $this->wc_am_activated_key );
 			$options           = ( $input == 'on' ? 'on' : 'off' );
 
@@ -758,7 +892,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		 *
 		 * @return bool
 		 */
-		public function replace_license_key( $current_api_key ) {
+		public function replace_license_key( $current_api_key )
+		{
 			$args = array(
 				'api_key' => $current_api_key,
 			);
@@ -776,7 +911,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 
 		public function wc_am_deactivate_text() { }
 
-		public function wc_am_deactivate_textarea() {
+		public function wc_am_deactivate_textarea()
+		{
 			echo '<input type="checkbox" id="' . esc_attr( $this->wc_am_deactivate_checkbox_key ) . '" name="' . esc_attr( $this->wc_am_deactivate_checkbox_key ) . '" value="on"';
 			echo checked( get_option( $this->wc_am_deactivate_checkbox_key ), 'on' );
 			echo '/>';
@@ -792,7 +928,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		 *
 		 * @return string
 		 */
-		public function create_software_api_url( $args ) {
+		public function create_software_api_url( $args )
+		{
 			return add_query_arg( 'wc-api', 'wc-am-api', $this->api_url ) . '&' . http_build_query( $args );
 		}
 
@@ -803,7 +940,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		 *
 		 * @return bool|string
 		 */
-		public function activate( $args ) {
+		public function activate( $args )
+		{
 			$defaults = array(
 				'wc_am_action'     => 'activate',
 				'product_id'       => $this->product_id,
@@ -823,10 +961,6 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 
 			$response = wp_remote_retrieve_body( $request );
 
-			// Update licence transient
-			$license_data = self::fetch_license_data();
-			set_transient( self::$transient_name, $license_data, 24 * HOUR_IN_SECONDS );
-
 			return $response;
 		}
 
@@ -837,11 +971,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		 *
 		 * @return bool|string
 		 */
-		public function deactivate( $args ) {
-
-			// Delete obsolete license data
-			delete_transient( self::$transient_name );
-
+		public function deactivate( $args )
+		{
 			$defaults = array(
 				'wc_am_action' => 'deactivate',
 				'product_id'   => $this->product_id,
@@ -866,19 +997,12 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		 *
 		 * @return string
 		 */
-		public function status() {
+		public function status()
+		{
 			if ( empty( $this->data[ $this->wc_am_api_key_key ] ) ) {
 				return '';
 			}
-
-			/**
-			 * Use a transient
-			 */
-			$license_data = get_transient( self::$transient_name );
-			if ( ! $license_data ) {
-				$license_data = self::fetch_license_data();
-				set_transient( self::$transient_name, $license_data, 24 * HOUR_IN_SECONDS );
-			}
+			$license_data = self::fetch_license_data();
 
 			return $license_data;
 		}
@@ -888,7 +1012,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		 *
 		 * @return string
 		 */
-		private function fetch_license_data() {
+		private function fetch_license_data()
+		{
 			$args = array(
 				'wc_am_action' => 'status',
 				'api_key'      => $this->data[ $this->wc_am_api_key_key ],
@@ -908,27 +1033,10 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		}
 
 		/**
-		 * Retrieves the license owner from the server.
-		 *
-		 * @return string
-		 */
-		private function fetch_license_owner() {
-			$args = array(
-				'wc_am_action' => 'status',
-				'api_key'      => $this->data[ $this->wc_am_api_key_key ],
-				'product_id'   => $this->product_id,
-				'instance'     => $this->wc_am_instance_id,
-				'object'       => $this->wc_am_domain,
-			);
-
-			$target_url = esc_url_raw( $this->create_software_api_url( $args ) );
-			dump( $target_url );
-		}
-
-		/**
 		 * Check for software updates.
 		 */
-		public function check_for_update() {
+		public function check_for_update()
+		{
 			$this->plugin_name = $this->wc_am_plugin_name;
 
 			// Slug should be the same as the plugin/theme directory name
@@ -982,7 +1090,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		 *
 		 * @return bool|string $response
 		 */
-		public function send_query( $args ) {
+		public function send_query( $args )
+		{
 			$target_url = esc_url_raw( add_query_arg( 'wc-api', 'wc-am-api', $this->api_url ) . '&' . http_build_query( $args ) );
 			$request    = wp_safe_remote_post( $target_url, array( 'timeout' => 15 ) );
 
@@ -1004,7 +1113,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		 *
 		 * @return object $transient
 		 */
-		public function update_check( $transient ) {
+		public function update_check( $transient )
+		{
 			if ( empty( $transient->checked ) ) {
 				return $transient;
 			}
@@ -1079,7 +1189,8 @@ if ( ! class_exists( 'WC_AM_Client_2_7K2' ) ) {
 		 *
 		 * @return object
 		 */
-		public function information_request( $result, $action, $args ) {
+		public function information_request( $result, $action, $args )
+		{
 			// Check if this plugins API is about this plugin
 			if ( isset( $args->slug ) ) {
 				if ( $args->slug != $this->slug ) {
